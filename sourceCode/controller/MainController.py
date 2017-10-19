@@ -1,9 +1,9 @@
 import time;
 
-from model.Estudante import Estudante;
-from model.Item import Item
-from model.Pedido import Pedido;
-from model.Sala import Sala
+from sourceCode.model.Estudante import Estudante;
+from sourceCode.model.Item import Item
+from sourceCode.model.Pedido import Pedido;
+from sourceCode.model.Sala import Sala;
 
 
 class MainController:
