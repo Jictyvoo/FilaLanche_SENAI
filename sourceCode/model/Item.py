@@ -1,27 +1,27 @@
-class Item:
-    nome = "";
-    preco = 0.0;
-    quantidade = 0;
+class Item:  # Classe que armazena os dados dos produtos a serem vendidos
+    nome = "";  # atributo de nome do produto a ser vendido na cantina
+    preco = 0.0;  # atributo que indica o preco do produto
+    quantidade = 0;  # atributo que indica a quantidade
 
-    def __init__(self, nome, preco, quantidade):
+    def __init__(self, nome, preco, quantidade):  # metodo construtor da classe Item
         self.nome = nome;
         self.preco = preco;
         self.quantidade = quantidade;
 
-    def getNome(self):
+    def getNome(self):  # metodo para retorno do nome do produto
         return self.nome;
 
-    def setNome(self, nome):
+    def setNome(self, nome):  # metodo para modificar o nome do produto
         self.nome = nome;
 
-    def getPreco(self):
+    def getPreco(self):  # metodo para retornar o preco do item
         return self.preco;
 
-    def setPreco(self, preco):
+    def setPreco(self, preco):  # metodo para modificar o preco do produto
         self.preco = preco;
 
-    def getQuantidade(self):
+    def getQuantidade(self):  # metodo para retornar a quantidade de itens disponiveis
         return self.quantidade;
 
-    def setQuantidade(self, quantidade):
+    def setQuantidade(self, quantidade):  # metodo para modificar a quantidade de itens disponiveis
         self.quantidade = quantidade;

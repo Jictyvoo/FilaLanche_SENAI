@@ -1,27 +1,29 @@
+# Classe para armazenar dados do estudante
+
 class Estudante:
-	turma = "";
-	idEstudante = "";
-	nomeAluno = "";
+    turma = "";  # atributo que armazena o id da turma a qual o estudante esta associado
+    idEstudante = "";  # id do estudante na instituicao
+    nomeAluno = "";  # nome do aluno
 
-	def __init__(self, turma, idEstudante, nomeAluno):
-		self.turma = turma;
-		self.idEstudante = idEstudante;
-		self.nomeAluno = nomeAluno;
+    def __init__(self, turma, idEstudante, nomeAluno):  # metodo construtor da classe estudante
+        self.turma = turma;  # modifica a propria turma da instancia para receber a nova turma
+        self.idEstudante = idEstudante;  # modifica o proprio id da instancia para receber o novo id
+        self.nomeAluno = nomeAluno;  # modifica o proprio nome da instancia para receber o novo nome
 
-	def getIdEstudante(self):
-		return self.idEstudante;
+    def getIdEstudante(self):  # metodo para recebimento do id do estudante
+        return self.idEstudante;
 
-	def setIdEstudante(self, idEstudante):
-		self.idEstudante = idEstudante;
+    def setIdEstudante(self, idEstudante):  # metodo para modificar o id do estudante
+        self.idEstudante = idEstudante;
 
-	def getNome(self):
-		return self.nomeAluno;
+    def getNome(self):  # metodo para retornar o nome do estudante
+        return self.nomeAluno;
 
-	def setNome(self, nomeAluno):
-		self.nomeAluno = nomeAluno;
+    def setNome(self, nomeAluno):  # metodo para modificar o nome do estudante
+        self.nomeAluno = nomeAluno;
 
-	def getTurma(self):
-		return self.turma;
+    def getTurma(self):  # metodo para retornar a turma do estudante
+        return self.turma;
 
-	def setTurma(self, turma):
-		self.turma = turma;
+    def setTurma(self, turma):  # metodo para modificar a turma do estudante
+        self.turma = turma;
