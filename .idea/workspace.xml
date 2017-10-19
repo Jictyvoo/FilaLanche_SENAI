@@ -31,6 +31,7 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MainController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sourceCode/controller/MainController.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="791">
@@ -38,6 +39,16 @@
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sourceCode/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1420">
+              <caret line="261" column="12" lean-forward="true" selection-start-line="261" selection-start-column="12" selection-end-line="262" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,6 +129,12 @@
               <item name="FilaLanche_SENAI" type="b2602c69:ProjectViewProjectNode" />
               <item name="FilaLanche_SENAI" type="462c0819:PsiDirectoryNode" />
               <item name="sourceCode" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FilaLanche_SENAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FilaLanche_SENAI" type="462c0819:PsiDirectoryNode" />
+              <item name="sourceCode" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -170,7 +187,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23970588" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -364,11 +380,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sourceCode/controller/MainController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="791">
           <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1420">
+          <caret line="261" column="12" lean-forward="true" selection-start-line="261" selection-start-column="12" selection-end-line="262" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
