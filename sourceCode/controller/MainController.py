@@ -1,7 +1,7 @@
 import time;
 
 from sourceCode.model.Estudante import Estudante;
-from sourceCode.model.Item import Item
+from sourceCode.model.Item import Item;
 from sourceCode.model.Pedido import Pedido;
 from sourceCode.model.Sala import Sala;
 
@@ -33,12 +33,17 @@ class MainController:
     def novoPedido(self, idEstudante, listaNomesProdutos):
         foundedStudent = self.buscaEstudante(idEstudante);
         if (foundedStudent):
-            turmaEncontrada = foundedStudent.getTurma();  # falta encontrar a turma
+            turmaEncontrada = foundedStudent.getTurma();
             if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
                 novoPedido = Pedido(foundedStudent, listaNomesProdutos);
                 self.pedidos.append(novoPedido);
+                self.vendeProduto(listaNomesProdutos);
                 return True;
         return False;
+
+    def vendeProduto(self, listaDeProdutos):
+        for (index, value) in enumerate(listaDeProdutos):
+            value.setQuantidade(value.getQuantidade() - 1);
 
     def novoRegistroEstudante(self, nome, id, turma):
         novoEstudante = Estudante(turma, id, nome);
@@ -75,3 +80,5 @@ class MainController:
             linha = arquivoProdutos.readline().split(';');
             self.salasDesocupadas.append(Sala(linha[0], linha[1]));
 
+    def getTodosProdutos(self):
+        return self.itens;
