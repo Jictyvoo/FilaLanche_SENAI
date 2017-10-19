@@ -74,3 +74,4 @@ class MainController:
         while (True):
             linha = arquivoProdutos.readline().split(';');
             self.salasDesocupadas.append(Sala(linha[0], linha[1]));
+
