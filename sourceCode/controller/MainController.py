@@ -12,6 +12,7 @@ class MainController:
     itens = [];
     salas = [];
     salasDesocupadas = [];
+    itensPreVenda = [];
 
     def __init__(self):
         self.estudates = [];
@@ -19,6 +20,7 @@ class MainController:
         self.itens = [];
         self.salas = {};
         self.salasDesocupadas = [];
+        self.itensPreVenda = [];
 
     def buscaEstudante(self, idEstudante):
         for (index, value) in enumerate(self.estudates):
@@ -55,15 +57,17 @@ class MainController:
         can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0];
         if (not can):
             return False;
-        can = int(horarioAtual.split('-')[1]) - int(horarioNecessario.split('-')[1]);
+        can = (int(horarioAtual.split('-')[1]) + (int(horarioAtual.split('-')[0]) * 60)) - (
+            int(horarioNecessario.split('-')[1]) + (int(horarioNecessario.split('-')[0]) * 60));
         if (can <= 20 and can >= 10):
             return True;
 
     def carregarProdutosEmEstoque(self):
-        arquivoProdutos = open("../produtos.csv", "r");
+        arquivoProdutos = open("../entradas/produtos.csv", "r");
         while (True):
             linha = arquivoProdutos.readline().split(';');
             self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
+            self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
 
     def novoProduto(self, nome, preco, quantidade):
         self.itens.append(Item(nome, preco, quantidade));
@@ -75,10 +79,16 @@ class MainController:
             self.salasDesocupadas.remove(salaEncontrada);
 
     def carregarSalas(self):
-        arquivoProdutos = open("../salas.csv", "r");
+        arquivoProdutos = open("../entradas/salas.csv", "r");
         while (True):
             linha = arquivoProdutos.readline().split(';');
             self.salasDesocupadas.append(Sala(linha[0], linha[1]));
 
     def getTodosProdutos(self):
         return self.itens;
+
+    def registrarLucro(self):
+        arquivoLucro = open("../lucros/lucroCantina.csv" + time.strftime('%X %x %Z'), "w");
+        for index in range(0, len(self.itens.getDescricao())):
+            arquivoLucro.write(self.itens[index].getNome() + ";" + self.itens[index].getPreco() * (
+                self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade()));
