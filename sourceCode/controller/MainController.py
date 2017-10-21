@@ -32,6 +32,11 @@ class MainController:
             if (value.getIdSala() == idSala):
                 return value;
 
+    def buscaItem(self, nome):
+        for (index, value) in enumerate(self.itensPreVenda):
+            if (value.getNome() == nome):
+                return value;
+
     def novoPedido(self, idEstudante, listaNomesProdutos):
         foundedStudent = self.buscaEstudante(idEstudante);
         if (foundedStudent):
@@ -92,3 +97,21 @@ class MainController:
         for index in range(0, len(self.itens.getDescricao())):
             arquivoLucro.write(self.itens[index].getNome() + ";" + self.itens[index].getPreco() * (
                 self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade()));
+
+    def modificarEstudante(self, turma, id, nome):
+        estudante = self.buscaEstudante(id);
+        estudante.setIdEstudante(id);
+        estudante.setNome(nome);
+        estudante.setTurma(turma);
+
+    def modificarSala(self, id, horarioIntervalo):
+        sala = self.buscaSala(id);
+        sala.setIdSala(id);
+        sala.setHorarioIntervalo(horarioIntervalo);
+
+    def modificarItens(self, nome, preco, quantidade):
+        itens = self.buscaItem(nome);
+        itens.setNome(nome);
+        itens.setPreco(preco);
+        itens.setQuantidade(quantidade);
+
