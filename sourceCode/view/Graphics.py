@@ -40,61 +40,36 @@ class Application:
         self.container9["pady"] = 15
         self.container9.pack()
 
-        self.titulo = Label(self.container1, text="Informe os dados :")
+        self.titulo = Label(self.container1, text="Realize seu Pedido:")
         self.titulo["font"] = ("Calibri", "9", "bold")
         self.titulo.pack()
 
-        self.lblidusuario = Label(self.container2, text="idUsuario:", font=self.fonte, width=10)
-        self.lblidusuario.pack(side=LEFT)
+        self.lblIdEstudante = Label(self.container2, text="Matricula:", font=self.fonte, width=10)
+        self.lblIdEstudante.pack(side=LEFT)
 
-        self.txtidusuario = Entry(self.container2)
-        self.txtidusuario["width"] = 10
-        self.txtidusuario["font"] = self.fonte
-        self.txtidusuario.pack(side=LEFT)
+        self.txtIdEstudante = Entry(self.container2)
+        self.txtIdEstudante["width"] = 10
+        self.txtIdEstudante["font"] = self.fonte
+        self.txtIdEstudante.pack(side=LEFT)
 
         self.btnBuscar = Button(self.container2, text="Buscar", font=self.fonte, width=10)
         self.btnBuscar.pack(side=RIGHT)
 
-        self.lblnome = Label(self.container3, text="Nome:", font=self.fonte, width=10)
-        self.lblnome.pack(side=LEFT)
+        self.lblNome = Label(self.container3, text="Nome:", font=self.fonte, width=10)
+        self.lblNome.pack(side=LEFT)
 
-        self.txtnome = Entry(self.container3)
-        self.txtnome["width"] = 25
-        self.txtnome["font"] = self.fonte
-        self.txtnome.pack(side=LEFT)
+        self.txtNome = Entry(self.container3)
+        self.txtNome["width"] = 25
+        self.txtNome["font"] = self.fonte
+        self.txtNome.pack(side=LEFT)
 
-        self.lbltelefone = Label(self.container4, text="Telefone:", font=self.fonte, width=10)
-        self.lbltelefone.pack(side=LEFT)
+        self.lblTurma = Label(self.container4, text="Turma:", font=self.fonte, width=10)
+        self.lblTurma.pack(side=LEFT)
 
-        self.txttelefone = Entry(self.container4)
-        self.txttelefone["width"] = 25
-        self.txttelefone["font"] = self.fonte
-        self.txttelefone.pack(side=LEFT)
-
-        self.lblemail = Label(self.container5, text="E-mail:", font=self.fonte, width=10)
-        self.lblemail.pack(side=LEFT)
-
-        self.txtemail = Entry(self.container5)
-        self.txtemail["width"] = 25
-        self.txtemail["font"] = self.fonte
-        self.txtemail.pack(side=LEFT)
-
-        self.lblusuario = Label(self.container6, text="Usuário:", font=self.fonte, width=10)
-        self.lblusuario.pack(side=LEFT)
-
-        self.txtusuario = Entry(self.container6)
-        self.txtusuario["width"] = 25
-        self.txtusuario["font"] = self.fonte
-        self.txtusuario.pack(side=LEFT)
-
-        self.lblsenha = Label(self.container7, text="Senha:", font=self.fonte, width=10)
-        self.lblsenha.pack(side=LEFT)
-
-        self.txtsenha = Entry(self.container7)
-        self.txtsenha["width"] = 25
-        self.txtsenha["show"] = "*"
-        self.txtsenha["font"] = self.fonte
-        self.txtsenha.pack(side=LEFT)
+        self.txtTurma = Entry(self.container4)
+        self.txtTurma["width"] = 25
+        self.txtTurma["font"] = self.fonte
+        self.txtTurma.pack(side=LEFT)
 
         self.bntInsert = Button(self.container8, text="Inserir", font=self.fonte, width=12)
         self.bntInsert.pack(side=LEFT)
@@ -108,8 +83,3 @@ class Application:
         self.lblmsg = Label(self.container9, text="")
         self.lblmsg["font"] = ("Verdana", "9", "italic")
         self.lblmsg.pack()
-
-
-root = Tk()
-Application(root)
-root.mainloop()
