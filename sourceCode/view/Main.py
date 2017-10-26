@@ -4,6 +4,14 @@ from sourceCode.controller.MainController import MainController;
 from sourceCode.view.Graphics import Application;
 
 controller = MainController();
+controller.carregarProdutosEmEstoque();
+controller.carregarSalas();
+
+#test
+
+controller.alocarTurmasSalas("chp54125", "Microsoft");
+
+
 
 root = Tk()
 Application(root)
