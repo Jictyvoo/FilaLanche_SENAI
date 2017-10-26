@@ -70,9 +70,13 @@ class MainController:
     def carregarProdutosEmEstoque(self):
         arquivoProdutos = open("../entradas/produtos.csv", "r");
         while (True):
-            linha = arquivoProdutos.readline().split(';');
-            self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
-            self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
+            linha = arquivoProdutos.readline().split(';')
+            print(linha)
+            if(len(linha) == 3):
+                self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
+                self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
+            else:
+                return;
 
     def novoProduto(self, nome, preco, quantidade):
         self.itens.append(Item(nome, preco, quantidade));
@@ -82,12 +86,18 @@ class MainController:
         if (salaEncontrada):
             self.salas[turma] = salaEncontrada;
             self.salasDesocupadas.remove(salaEncontrada);
+            return True;
+        else:
+            return False;
 
     def carregarSalas(self):
         arquivoProdutos = open("../entradas/salas.csv", "r");
         while (True):
             linha = arquivoProdutos.readline().split(';');
-            self.salasDesocupadas.append(Sala(linha[0], linha[1]));
+            if(len(linha) == 3):
+                self.salasDesocupadas.append(Sala(linha[0], linha[1]));
+            else:
+                return;
 
     def getTodosProdutos(self):
         return self.itens;
