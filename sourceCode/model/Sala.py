@@ -1,6 +1,6 @@
 class Sala:  # classe que armazena a sala pelo seu id e qual o horario de intervalo da mesma
-    idSala = ""  # atributo que armazena o id da sala
-    horarioIntervalo = ""  # atributo que define o horario de intervalo daquela sala
+    idSala = "";  # atributo que armazena o id da sala
+    horarioIntervalo = "";  # atributo que define o horario de intervalo daquela sala
 
     def __init__(self, idSala, horarioIntervalo):  # metodo construtor da classe Sala
         self.idSala = idSala;
