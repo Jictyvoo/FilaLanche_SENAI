@@ -22,6 +22,10 @@ class MainController:
         self.salasDesocupadas = [];
         self.itensPreVenda = [];
 
+    def getitens(self):
+        return self.itens
+
+
     def buscaEstudante(self, idEstudante):
         for (index, value) in enumerate(self.estudates):
             if (value.getIdEstudante() == idEstudante):
