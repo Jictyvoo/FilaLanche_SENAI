@@ -1,4 +1,6 @@
 from sourceCode.controller.MainController import MainController
+import os
+
 
 class Interface:
 
@@ -12,31 +14,83 @@ class Interface:
         idEstudante = str(input())
         return idEstudante
 
+    def cadastrarEstudante(self):
+        turmaEstudante = ""
+        idEstudante = 0
+        nomeEstudante = ""
+        wrongInput = True
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Insira o ID do Estudante")
+                idEstudante = int(input())
+                wrongInput = False
+            except():
+                wrongInput = True
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Insira a turma do Estudante")
+                turmaEstudante = str(input())
+                wrongInput = False
+            except():
+                wrongInput = True
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Insira o nome do Estudante")
+                nomeEstudante = str(input())
+                wrongInput = False
+            except():
+                wrongInput = True
+        self.controller.novoEstudante(nomeEstudante, idEstudante, turmaEstudante)
+        os.system("cls || clear")
+        print("Cadastro realizado com sucesso!")
+
+    def realizarPedido(self):
+        for index, value in enumerate(self.controller.getTodosProdutos()):
+            print("[" + str(index) + "] - " + value.getNome() + " -- R$" + str(value.getPreco()))
+        print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
+        entrada = input()
+
+        analisa = str(entrada).split("-")
+        pedido = []
+        for index, value in enumerate(analisa):
+            divide = value.split("*")
+            for position in range(0, int(divide[1])):
+                pedido.append(self.controller.getTodosProdutos()[divide[0]])
+
     def mainLoop(self):
         idEstudante = self.inserirIdEstudante()
         estudante = self.controller.buscaEstudante(idEstudante)
-        if(not estudante):
+        if (not estudante):
             print("Estudante nao encontrado!")
-            print("[1] - Inserir novo estudante")
+            print("[1] - Inserir novo estudante\n[] - Buscar novamente")
             selecao = input()
-            if(selecao == "1"):
-                print("ola")
+            if (selecao == "1"):
+                self.cadastrarEstudante()
+                self.realizarPedido()
+            else:
+                self.mainLoop()
+        else:
+            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[] - Sair")
+            entrada = input()
+            if (entrada == "1"):
+                self.controller.modificarEstudante("chp12345", 321, "Francis")
+            elif (entrada == "2"):
+                self.realizarPedido()
             else:
                 self.mainLoop()
 
     def realizarCadastros(self):
         self.controller.alocarTurmasSalas("chp54125", "Microsoft")
-        self.controller.buscaItem("Croquete")
-        self.controller.buscaSala("1")
-        self.controller.buscaEstudante(123)
-        self.controller.modificarEstudante("chp12345", 321, "Francis")
         self.controller.modificarItens("Pastel de Catupiri", 2.50, 10)
         self.controller.modificarSala(456, "20:10")
-        self.controller.novoPedido(1, "Croquete")
-        self.controller.novoRegistroEstudante("joao", 123, "chp54125")
-        self.controller.podeComprar("20:00")
         self.controller.novoProduto("Abel", 1.55, 20)
 
     def getController(self):
         return self.controller
+<<<<<<< HEAD
 
+=======
+>>>>>>> e74f21e4a0bd4e13d26a7b268fdeefb2001a9b5d
