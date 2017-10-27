@@ -31,15 +31,18 @@ class MainController:
                 return value
 
     def novoPedido(self, idEstudante, listaNomesProdutos):
-        foundedStudent = self.buscaEstudante(idEstudante)
-        if (foundedStudent):
-            turmaEncontrada = foundedStudent.getTurma()
-            if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
-                novoPedido = Pedido(foundedStudent, listaNomesProdutos)
-                self.pedidos.append(novoPedido)
-                self.vendeProduto(listaNomesProdutos)
-                return True
-        return False
+        try:
+            foundedStudent = self.buscaEstudante(idEstudante)
+            if (foundedStudent):
+                turmaEncontrada = foundedStudent.getTurma()
+                if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
+                    novoPedido = Pedido(foundedStudent, listaNomesProdutos)
+                    self.pedidos.append(novoPedido)
+                    self.vendeProduto(listaNomesProdutos)
+                    return True
+            return False
+        except(KeyError):
+            return False
 
     def vendeProduto(self, listaDeProdutos):
         for (index, value) in enumerate(listaDeProdutos):
@@ -103,7 +106,7 @@ class MainController:
         arquivoLucro = open(
             "../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[
                                              0:10] + ".csv", "w")
-        for index in range(0, len(self.itens) - 1):
+        for index in range(0, len(self.itens)):
             arquivoLucro.write(self.itens[index].getNome() + ";" + str(self.itens[index].getPreco() * (
                 self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade())) + "\n")
 
