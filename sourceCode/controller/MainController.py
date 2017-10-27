@@ -1,138 +1,128 @@
-import time;
+import time
 
-from sourceCode.model.Estudante import Estudante;
-from sourceCode.model.Item import Item;
-from sourceCode.model.Pedido import Pedido;
-from sourceCode.model.Sala import Sala;
+from sourceCode.model.Estudante import Estudante
+from sourceCode.model.Item import Item
+from sourceCode.model.Pedido import Pedido
+from sourceCode.model.Sala import Sala
 
 
 class MainController:
-    estudates = [];
-    pedidos = [];
-    itens = [];
-    salas = [];
-    salasDesocupadas = [];
-    itensPreVenda = [];
-
     def __init__(self):
-        self.estudates = [];
-        self.pedidos = [];
-        self.itens = [];
-        self.salas = {};
-        self.salasDesocupadas = [];
-        self.itensPreVenda = [];
-
-    def getitens(self):
-        return self.itens
+        self.estudates = []
+        self.pedidos = []
+        self.itens = []
+        self.salas = {}
+        self.salasDesocupadas = []
+        self.itensPreVenda = []
 
     def buscaEstudante(self, idEstudante):
         for (index, value) in enumerate(self.estudates):
             if (value.getIdEstudante() == idEstudante):
-                return value;
+                return value
 
     def buscaSala(self, idSala):
         for (index, value) in enumerate(self.salasDesocupadas):
             if (value.getIdSala() == idSala):
-                return value;
+                return value
 
     def buscaItem(self, nome):
         for (index, value) in enumerate(self.itensPreVenda):
             if (value.getNome() == nome):
-                return value;
+                return value
 
     def novoPedido(self, idEstudante, listaNomesProdutos):
-        foundedStudent = self.buscaEstudante(idEstudante);
+        foundedStudent = self.buscaEstudante(idEstudante)
         if (foundedStudent):
-            turmaEncontrada = foundedStudent.getTurma();
+            turmaEncontrada = foundedStudent.getTurma()
             if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
-                novoPedido = Pedido(foundedStudent, listaNomesProdutos);
-                self.pedidos.append(novoPedido);
-                self.vendeProduto(listaNomesProdutos);
-                return True;
-        return False;
+                novoPedido = Pedido(foundedStudent, listaNomesProdutos)
+                self.pedidos.append(novoPedido)
+                self.vendeProduto(listaNomesProdutos)
+                return True
+        return False
 
     def vendeProduto(self, listaDeProdutos):
         for (index, value) in enumerate(listaDeProdutos):
-            value.setQuantidade(value.getQuantidade() - 1);
+            value.setQuantidade(value.getQuantidade() - 1)
 
-    def novoRegistroEstudante(self, nome, id, turma):
-        novoEstudante = Estudante(turma, id, nome);
-        self.estudates.append(novoEstudante);
+    def novoEstudante(self, nome, id, turma):
+        novoEstudante = Estudante(turma, id, nome)
+        self.estudates.append(novoEstudante)
 
     def podeComprar(self, horarioNecessario):
-        now = time.localtime();
-        tempo = str(time.asctime(now)).split(" ");
+        now = time.localtime()
+        tempo = str(time.asctime(now)).split(" ")
 
         # horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
-        horarioAtual = tempo[3].replace(":", "-")[0:5];
-        can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0];
+        horarioAtual = tempo[3].replace(":", "-")[0:5]
+        can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0]
         if (not can):
-            return False;
+            return False
         can = (int(horarioAtual.split('-')[1]) + (int(horarioAtual.split('-')[0]) * 60)) - (
             int(horarioNecessario.split('-')[1]) + (int(horarioNecessario.split('-')[0]) * 60));
         if (can <= 20 and can >= 10):
-            return True;
+            return True
 
     def carregarProdutosEmEstoque(self):
-        arquivoProdutos = open("../entradas/produtos.csv", "r");
+        arquivoProdutos = open("../entradas/produtos.csv", "r")
         while (True):
-            linha = arquivoProdutos.readline().split(';');
+            linha = arquivoProdutos.readline().split(';')
             if (len(linha) == 3):
-                linha[2] = linha[2].replace("\n", "");
-                self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
-                self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
+                linha[2] = linha[2].replace("\n", "")
+                self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])))
+                self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])))
             else:
-                return;
+                return
 
     def novoProduto(self, nome, preco, quantidade):
-        self.itens.append(Item(nome, preco, quantidade));
+        self.itens.append(Item(nome, preco, quantidade))
 
     def alocarTurmasSalas(self, turma, idSala):
-        salaEncontrada = self.buscaSala(idSala);
+        salaEncontrada = self.buscaSala(idSala)
         if (salaEncontrada):
-            self.salas[turma] = salaEncontrada;
-            self.salasDesocupadas.remove(salaEncontrada);
-            return True;
+            self.salas[turma] = salaEncontrada
+            self.salasDesocupadas.remove(salaEncontrada)
+            return True
         else:
-            return False;
+            return False
 
     def carregarSalas(self):
-        arquivoProdutos = open("../entradas/salas.csv", "r");
+        arquivoProdutos = open("../entradas/salas.csv", "r")
         while (True):
-            linha = arquivoProdutos.readline().split(';');
+            linha = arquivoProdutos.readline().split(';')
             if (len(linha) == 3):
-                linha[1] = linha[1].replace("\n", "");
-                self.salasDesocupadas.append(Sala(linha[0], linha[1]));
+                linha[1] = linha[1].replace("\n", "")
+                self.salasDesocupadas.append(Sala(linha[0], linha[1]))
             else:
-                return;
+                return
 
     def getTodosProdutos(self):
-        return self.itens;
+        return self.itens
 
     def registrarLucro(self):
         arquivoLucro = open(
             "../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[
-                                             0:10] + ".csv", "w");
+                                             0:10] + ".csv", "w")
         for index in range(0, len(self.itens) - 1):
             arquivoLucro.write(self.itens[index].getNome() + ";" + str(self.itens[index].getPreco() * (
-                self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade())) + "\n");
+                self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade())) + "\n")
 
     def modificarEstudante(self, turma, id, nome):
-        estudante = self.buscaEstudante(id);
+        estudante = self.buscaEstudante(id)
         if (estudante):
-            estudante.setIdEstudante(id);
-            estudante.setNome(nome);
-            estudante.setTurma(turma);
+            estudante.setIdEstudante(id)
+            estudante.setNome(nome)
+            estudante.setTurma(turma)
 
     def modificarSala(self, id, horarioIntervalo):
-        sala = self.buscaSala(id);
+        sala = self.buscaSala(id)
         if (sala):
-            sala.setIdSala(id);
-            sala.setHorarioIntervalo(horarioIntervalo);
+            sala.setIdSala(id)
+            sala.setHorarioIntervalo(horarioIntervalo)
 
     def modificarItens(self, nome, preco, quantidade):
-        itens = self.buscaItem(nome);
+        itens = self.buscaItem(nome)
         if (itens):
-            itens.setNome(nome);
-            itens.setPreco(preco);
-            itens.setQuantidade(quantidade);
+            itens.setNome(nome)
+            itens.setPreco(preco)
+            itens.setQuantidade(quantidade)
