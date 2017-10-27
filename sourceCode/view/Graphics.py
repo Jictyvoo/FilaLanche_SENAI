@@ -4,7 +4,6 @@ from tkinter import *
 class Application:
     def __init__(self, master=None):
         self.fonte = ("Verdana", "8")
-
         self.container1 = Frame(master)
         self.container1["pady"] = 10
         self.container1.pack()
@@ -83,3 +82,8 @@ class Application:
         self.lblmsg = Label(self.container9, text="")
         self.lblmsg["font"] = ("Verdana", "9", "italic")
         self.lblmsg.pack()
+
+
+root = Tk()
+Application(root)
+root.mainloop()

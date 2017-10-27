@@ -22,6 +22,10 @@ class MainController:
         self.salasDesocupadas = [];
         self.itensPreVenda = [];
 
+    def getitens(self):
+        return self.itens
+
+
     def buscaEstudante(self, idEstudante):
         for (index, value) in enumerate(self.estudates):
             if (value.getIdEstudante() == idEstudante):
@@ -58,10 +62,11 @@ class MainController:
 
     def podeComprar(self, horarioNecessario):
         now = time.localtime();
-        tempo = str(time.asctime([now])).split(" ");
+        tempo = str(time.asctime(now)).split(" ");
 
         #horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
-        horarioAtual = tempo[4].replace(":", "-")
+        horarioAtual = tempo[3].replace(":", "-")[0:5];
+        print(horarioAtual)
         can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0];
         if (not can):
             return False;
@@ -107,7 +112,7 @@ class MainController:
         return self.itens;
 
     def registrarLucro(self):
-        arquivoLucro = open("../lucros/lucroCantina.csv" + time.strftime('%X %x %Z'), "w");
+        arquivoLucro = open("../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ","-").replace(":","-") + ".csv", "w");
         for index in range(0, len(self.itens.getDescricao())):
             arquivoLucro.write(self.itens[index].getNome() + ";" + self.itens[index].getPreco() * (
                 self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade()));
