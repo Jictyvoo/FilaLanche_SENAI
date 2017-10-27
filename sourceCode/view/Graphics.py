@@ -82,8 +82,3 @@ class Application:
         self.lblmsg = Label(self.container9, text="")
         self.lblmsg["font"] = ("Verdana", "9", "italic")
         self.lblmsg.pack()
-
-
-root = Tk()
-Application(root)
-root.mainloop()

@@ -25,7 +25,6 @@ class MainController:
     def getitens(self):
         return self.itens
 
-
     def buscaEstudante(self, idEstudante):
         for (index, value) in enumerate(self.estudates):
             if (value.getIdEstudante() == idEstudante):
@@ -64,9 +63,8 @@ class MainController:
         now = time.localtime();
         tempo = str(time.asctime(now)).split(" ");
 
-        #horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
+        # horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
         horarioAtual = tempo[3].replace(":", "-")[0:5];
-        print(horarioAtual)
         can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0];
         if (not can):
             return False;
@@ -79,7 +77,7 @@ class MainController:
         arquivoProdutos = open("../entradas/produtos.csv", "r");
         while (True):
             linha = arquivoProdutos.readline().split(';');
-            if(len(linha) == 3):
+            if (len(linha) == 3):
                 linha[2] = linha[2].replace("\n", "");
                 self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
                 self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
@@ -102,7 +100,7 @@ class MainController:
         arquivoProdutos = open("../entradas/salas.csv", "r");
         while (True):
             linha = arquivoProdutos.readline().split(';');
-            if(len(linha) == 3):
+            if (len(linha) == 3):
                 linha[1] = linha[1].replace("\n", "");
                 self.salasDesocupadas.append(Sala(linha[0], linha[1]));
             else:
@@ -112,28 +110,29 @@ class MainController:
         return self.itens;
 
     def registrarLucro(self):
-        arquivoLucro = open("../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ","-").replace(":","-") + ".csv", "w");
-        for index in range(0, len(self.itens.getDescricao())):
-            arquivoLucro.write(self.itens[index].getNome() + ";" + self.itens[index].getPreco() * (
-                self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade()));
+        arquivoLucro = open(
+            "../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[
+                                             0:10] + ".csv", "w");
+        for index in range(0, len(self.itens) - 1):
+            arquivoLucro.write(self.itens[index].getNome() + ";" + str(self.itens[index].getPreco() * (
+                self.itensPreVenda[index].getQuantidade() - self.itens[index].getQuantidade())) + "\n");
 
     def modificarEstudante(self, turma, id, nome):
         estudante = self.buscaEstudante(id);
-        if(estudante):
+        if (estudante):
             estudante.setIdEstudante(id);
             estudante.setNome(nome);
             estudante.setTurma(turma);
 
     def modificarSala(self, id, horarioIntervalo):
         sala = self.buscaSala(id);
-        if(sala):
+        if (sala):
             sala.setIdSala(id);
             sala.setHorarioIntervalo(horarioIntervalo);
 
     def modificarItens(self, nome, preco, quantidade):
         itens = self.buscaItem(nome);
-        if(itens):
+        if (itens):
             itens.setNome(nome);
             itens.setPreco(preco);
             itens.setQuantidade(quantidade);
-
