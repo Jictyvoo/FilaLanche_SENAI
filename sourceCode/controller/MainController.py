@@ -62,7 +62,10 @@ class MainController:
 
     def podeComprar(self, horarioNecessario):
         now = time.localtime();
-        horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
+        tempo = str(time.asctime([now])).split(" ");
+
+        #horarioAtual = "" + now['tm_hour'] + "-" + now['tm_min'];
+        horarioAtual = tempo[4].replace(":", "-")
         can = horarioAtual.split('-')[0] == horarioNecessario.split('-')[0];
         if (not can):
             return False;
@@ -74,9 +77,9 @@ class MainController:
     def carregarProdutosEmEstoque(self):
         arquivoProdutos = open("../entradas/produtos.csv", "r");
         while (True):
-            linha = arquivoProdutos.readline().split(';')
-            print(linha)
+            linha = arquivoProdutos.readline().split(';');
             if(len(linha) == 3):
+                linha[2] = linha[2].replace("\n", "");
                 self.itens.append(Item(linha[0], float(linha[1]), int(linha[2])));
                 self.itensPreVenda.append(Item(linha[0], float(linha[1]), int(linha[2])));
             else:
@@ -99,6 +102,7 @@ class MainController:
         while (True):
             linha = arquivoProdutos.readline().split(';');
             if(len(linha) == 3):
+                linha[1] = linha[1].replace("\n", "");
                 self.salasDesocupadas.append(Sala(linha[0], linha[1]));
             else:
                 return;
@@ -114,18 +118,21 @@ class MainController:
 
     def modificarEstudante(self, turma, id, nome):
         estudante = self.buscaEstudante(id);
-        estudante.setIdEstudante(id);
-        estudante.setNome(nome);
-        estudante.setTurma(turma);
+        if(estudante):
+            estudante.setIdEstudante(id);
+            estudante.setNome(nome);
+            estudante.setTurma(turma);
 
     def modificarSala(self, id, horarioIntervalo):
         sala = self.buscaSala(id);
-        sala.setIdSala(id);
-        sala.setHorarioIntervalo(horarioIntervalo);
+        if(sala):
+            sala.setIdSala(id);
+            sala.setHorarioIntervalo(horarioIntervalo);
 
     def modificarItens(self, nome, preco, quantidade):
         itens = self.buscaItem(nome);
-        itens.setNome(nome);
-        itens.setPreco(preco);
-        itens.setQuantidade(quantidade);
+        if(itens):
+            itens.setNome(nome);
+            itens.setPreco(preco);
+            itens.setQuantidade(quantidade);
 
