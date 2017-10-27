@@ -33,7 +33,10 @@
 <<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -97,6 +100,7 @@
     <option name="CHANGED_PATHS">
       <list>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/sourceCode/controller/MainController.py" />
       </list>
     </option>
@@ -108,6 +112,8 @@
       <list>
 =======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
+=======
+>>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
         <option value="$PROJECT_DIR$/sourceCode/view/Main.py" />
       </list>
     </option>
@@ -115,6 +121,9 @@
 =======
 >>>>>>> 9a9aa2b8c82b7e1331e255a17c519cb5d98d50ec
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
+=======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
 =======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
@@ -159,8 +168,11 @@
               <item name="sourceCode" type="462c0819:PsiDirectoryNode" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               <item name="controller" type="462c0819:PsiDirectoryNode" />
 =======
+=======
+>>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
 =======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
               <item name="entradas" type="462c0819:PsiDirectoryNode" />
@@ -171,6 +183,9 @@
               <item name="sourceCode" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
+=======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
 =======
 >>>>>>> 17e8df97e2f93b979bcdae8eb33973f94ae3b6b2
