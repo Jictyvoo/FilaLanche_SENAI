@@ -1,6 +1,7 @@
 from sourceCode.controller.MainController import MainController
 
 class Interface:
+
     def __init__(self):
         self.controller = MainController()
         self.controller.carregarProdutosEmEstoque()
@@ -38,3 +39,4 @@ class Interface:
 
     def getController(self):
         return self.controller
+
