@@ -46,4 +46,19 @@ def mensagem():
 mensagem()
 print("Seja bem vindo ao sistema de cantina do SENAI!")
 print("Para iniciar coloque a sua matrícula!")
+import datetime
+
+def mensagem():
+    currentTime = datetime.datetime.now()
+    if (currentTime.hour < 12):
+        print("Bom dia!")
+    elif 12 <= currentTime.hour < 18:
+        print("Boa tarde!")
+    else:
+        print("Boa noite!")
+
+
+mensagem()
+print("Seja bem vindo ao sistema de cantina do SENAI!")
+print("Para iniciar coloque a sua matrícula!")
 
