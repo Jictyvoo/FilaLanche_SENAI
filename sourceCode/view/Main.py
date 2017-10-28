@@ -3,7 +3,6 @@
 
 from tkinter import *
 from sourceCode.controller.MainController import MainController;
-from sourceCode.view.Graphics import Application;
 
 main = MainController()
 
@@ -60,7 +59,7 @@ class Main:
 root = Tk()
 Main(root)
 root.mainloop()
-from sourceCode.view.Interface import Interface
+from sourceCode.view.CommandLine import Interface
 import os
 import datetime
 
