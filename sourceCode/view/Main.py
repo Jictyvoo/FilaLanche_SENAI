@@ -4,10 +4,8 @@ from sourceCode.view.CommandLine import Interface
 import os
 
 interface = Interface()
-interface.getController().carregarProdutosEmEstoque()
-interface.getController().carregarSalas()
 
-interface.getController().alocarTurmasSalas("chp", "Microsoft")
+print(interface.getController().alocarTurmasSalas("chp", "Microsoft"))
 while (interface.mainLoop()):
     os.system("cls")
 

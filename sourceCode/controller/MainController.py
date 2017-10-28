@@ -35,6 +35,8 @@ class MainController:
             foundedStudent = self.buscaEstudante(idEstudante)
             if (foundedStudent):
                 turmaEncontrada = foundedStudent.getTurma()
+                print(self.salas["chp"].getIdSala())
+                print(turmaEncontrada)
                 if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
                     novoPedido = Pedido(foundedStudent, listaNomesProdutos)
                     self.pedidos.append(novoPedido)
