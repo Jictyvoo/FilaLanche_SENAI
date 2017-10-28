@@ -30,6 +30,18 @@ class MainController:
             if (value.getNome() == nome):
                 return value
 
+    def analisaLinhaPedidos(self, entrada):
+        analisa = str(entrada).split("-")
+        pedido = []
+        for index, value in enumerate(analisa):
+            divide = value.split("*")
+            if len(divide) > 1:
+                for position in range(0, int(divide[1])):
+                    pedido.append(self.getTodosProdutos()[int(divide[0])])
+            else:
+                pedido.append(self.getTodosProdutos()[int(divide[0])])
+        return pedido
+
     def novoPedido(self, idEstudante, listaNomesProdutos):
         try:
             foundedStudent = self.buscaEstudante(idEstudante)
@@ -124,8 +136,6 @@ class MainController:
             estudante.setIdEstudante(id)
             estudante.setNome(nome)
             estudante.setTurma(turma)
-
-
 
     def modificarSala(self, id, horarioIntervalo):
         sala = self.buscaSala(id)

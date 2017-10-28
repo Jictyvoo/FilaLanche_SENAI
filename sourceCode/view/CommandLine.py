@@ -55,15 +55,7 @@ class Interface:
         print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
         entrada = input()
 
-        analisa = str(entrada).split("-")
-        pedido = []
-        for index, value in enumerate(analisa):
-            divide = value.split("*")
-            if len(divide) > 1:
-                for position in range(0, int(divide[1])):
-                    pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
-            else:
-                pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
+        pedido = self.controller.analisaLinhaPedidos(entrada)
         codigoRetorno = self.controller.novoPedido(idEstudante, pedido)
         if codigoRetorno == 0:
             print("Estudante não encontrado")
