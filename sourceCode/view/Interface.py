@@ -25,8 +25,9 @@ class Interface:
                 print("Insira o ID do Estudante")
                 idEstudante = int(input())
                 wrongInput = False
-            except():
+            except(ValueError):
                 wrongInput = True
+        wrongInput = True
         while (wrongInput):
             try:
                 os.system("cls || clear")
@@ -35,6 +36,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+        wrongInput = True
         while (wrongInput):
             try:
                 os.system("cls || clear")
@@ -46,8 +48,9 @@ class Interface:
         self.controller.novoEstudante(nomeEstudante, idEstudante, turmaEstudante)
         os.system("cls || clear")
         print("Cadastro realizado com sucesso!")
+        return idEstudante
 
-    def realizarPedido(self):
+    def realizarPedido(self, idEstudante):
         for index, value in enumerate(self.controller.getTodosProdutos()):
             print("[" + str(index) + "] - " + value.getNome() + " -- R$" + str(value.getPreco()))
         print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
@@ -58,18 +61,22 @@ class Interface:
         for index, value in enumerate(analisa):
             divide = value.split("*")
             for position in range(0, int(divide[1])):
-                pedido.append(self.controller.getTodosProdutos()[divide[0]])
+                pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
+        if(not self.controller.novoPedido(idEstudante, pedido)):
+            print("Erro! Turma nao alocada em sala")
 
     def mainLoop(self):
         idEstudante = self.inserirIdEstudante()
+        if (idEstudante == ""):
+            return False
         estudante = self.controller.buscaEstudante(idEstudante)
         if (not estudante):
             print("Estudante nao encontrado!")
             print("[1] - Inserir novo estudante\n[] - Buscar novamente")
             selecao = input()
             if (selecao == "1"):
-                self.cadastrarEstudante()
-                self.realizarPedido()
+                idEstudante = self.cadastrarEstudante()
+                self.realizarPedido(idEstudante)
             else:
                 self.mainLoop()
         else:
@@ -78,9 +85,10 @@ class Interface:
             if (entrada == "1"):
                 self.controller.modificarEstudante("chp12345", 321, "Francis")
             elif (entrada == "2"):
-                self.realizarPedido()
+                self.realizarPedido(idEstudante)
             else:
                 self.mainLoop()
+        return True
 
     def realizarCadastros(self):
         self.controller.alocarTurmasSalas("chp54125", "Microsoft")
