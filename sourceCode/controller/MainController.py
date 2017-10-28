@@ -93,7 +93,7 @@ class MainController:
         arquivoProdutos = open("../entradas/salas.csv", "r")
         while (True):
             linha = arquivoProdutos.readline().split(';')
-            if (len(linha) == 3):
+            if (len(linha) == 2):
                 linha[1] = linha[1].replace("\n", "")
                 self.salasDesocupadas.append(Sala(linha[0], linha[1]))
             else:
@@ -101,6 +101,9 @@ class MainController:
 
     def getTodosProdutos(self):
         return self.itens
+
+    def getTodasSala(self):
+        return self.salasDesocupadas
 
     def registrarLucro(self):
         arquivoLucro = open(
