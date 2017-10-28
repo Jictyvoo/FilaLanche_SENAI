@@ -3,7 +3,6 @@ import os
 
 
 class Interface:
-
     def __init__(self):
         self.controller = MainController()
         self.controller.carregarProdutosEmEstoque()
@@ -62,7 +61,7 @@ class Interface:
             divide = value.split("*")
             for position in range(0, int(divide[1])):
                 pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
-        if(not self.controller.novoPedido(idEstudante, pedido)):
+        if (not self.controller.novoPedido(idEstudante, pedido)):
             print("Erro! Turma nao alocada em sala")
 
     def mainLoop(self):
