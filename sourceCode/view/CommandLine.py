@@ -87,7 +87,12 @@ class Interface:
             print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[] - Sair")
             entrada = input()
             if (entrada == "1"):
-                self.controller.modificarEstudante("chp12345", 321, "Francis")
+                id = int(input("Digite o id "))
+                nome = str(input("Digite o nome "))
+                turma = str(input("Digite a turma "))
+                sala = str(input("Digite a sala alocada : "))
+                self.controller.modificarEstudante(turma, int(id), nome)
+                self.controller.alocarTurmasSalas(turma,sala)
             elif (entrada == "2"):
                 self.realizarPedido(idEstudante)
             else:
