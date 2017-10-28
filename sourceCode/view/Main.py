@@ -2,7 +2,6 @@
 
 
 from tkinter import *
-<<<<<<< HEAD
 from sourceCode.controller.MainController import MainController;
 from sourceCode.view.Graphics import Application;
 
@@ -61,7 +60,6 @@ class Main:
 root = Tk()
 Main(root)
 root.mainloop()
-=======
 from sourceCode.view.Interface import Interface
 import os
 import datetime
@@ -89,4 +87,3 @@ def mensagem():
 mensagem()
 print("Seja bem vindo ao sistema de cantina do SENAI!")
 print("Para iniciar coloque a sua matrícula!")
->>>>>>> b9be4afa2b602367bdc8a9bb6853217f2bc80028
