@@ -98,7 +98,3 @@ class Interface:
 
     def getController(self):
         return self.controller
-<<<<<<< HEAD
-
-=======
->>>>>>> e74f21e4a0bd4e13d26a7b268fdeefb2001a9b5d
