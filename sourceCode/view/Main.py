@@ -15,7 +15,6 @@ while (interface.mainLoop()):
 # Application(root)
 # root.mainloop()
 
-
 def mensagem():
     currentTime = datetime.datetime.now()
     if (currentTime.hour < 12):
