@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 from sourceCode.controller.MainController import MainController;
 
 
@@ -7,8 +6,6 @@ main = MainController()
 
 class Main:
     def __init__(self, master=None):
-        self.master = master
-        master.title("Cantina SENAI")
         self.fontePadrao = ("Arial", "10")
         self.c1 = Frame(master)
         self.c1["pady"] = 10
@@ -30,22 +27,8 @@ class Main:
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
-
-        self.listMenu = Label(self.c3, text="Menu", font=self.fontePadrao)
-        self.listMenu.pack(side=LEFT)
-
-        self.listMenu = Label(self.c2, text="      ID", font=self.fontePadrao)
-        self.listMenu.pack(side=LEFT)
-
-        objetos = main.getTodosProdutos()
-        main.carregarProdutosEmEstoque()
-        nomes = []
-        for i in objetos:
-            nomes.append(i.getNome())
-        combo = ttk.Combobox(root)
-        combo.place(x=50, y=100)
-        combo['values'] = nomes
-        combo.pack()
+        self.idAluno = Label(self.c2, text="      ID", font=self.fontePadrao)
+        self.idAluno.pack(side=LEFT)
 
         self.turma = Entry(self.c2)
         self.turma["width"] = 30
