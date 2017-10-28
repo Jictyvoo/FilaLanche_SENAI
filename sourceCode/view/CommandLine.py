@@ -89,11 +89,5 @@ class Interface:
                 self.mainLoop()
         return True
 
-    def realizarCadastros(self):
-        self.controller.alocarTurmasSalas("chp54125", "Microsoft")
-        self.controller.modificarItens("Pastel de Catupiri", 2.50, 10)
-        self.controller.modificarSala(456, "20:10")
-        self.controller.novoProduto("Abel", 1.55, 20)
-
     def getController(self):
         return self.controller
