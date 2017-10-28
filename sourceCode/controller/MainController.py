@@ -35,16 +35,18 @@ class MainController:
             foundedStudent = self.buscaEstudante(idEstudante)
             if (foundedStudent):
                 turmaEncontrada = foundedStudent.getTurma()
-                print(self.salas["chp"].getIdSala())
-                print(turmaEncontrada)
-                if (self.podeComprar(self.salas[turmaEncontrada].getHorarioIntervalo())):
+                horarioSala = self.salas[turmaEncontrada].getHorarioIntervalo()
+                canBuy = self.podeComprar(horarioSala)
+                if canBuy:
                     novoPedido = Pedido(foundedStudent, listaNomesProdutos)
                     self.pedidos.append(novoPedido)
                     self.vendeProduto(listaNomesProdutos)
-                    return True
-            return False
+                    return 1
+                else:
+                    return -2
+            return 0
         except(KeyError):
-            return False
+            return -1
 
     def vendeProduto(self, listaDeProdutos):
         for (index, value) in enumerate(listaDeProdutos):
@@ -67,6 +69,7 @@ class MainController:
             int(horarioNecessario.split('-')[1]) + (int(horarioNecessario.split('-')[0]) * 60));
         if (can <= 20 and can >= 10):
             return True
+        return False
 
     def carregarProdutosEmEstoque(self):
         arquivoProdutos = open("../entradas/produtos.csv", "r")

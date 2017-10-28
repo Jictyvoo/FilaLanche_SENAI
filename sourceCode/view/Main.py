@@ -5,7 +5,7 @@ import os
 
 interface = Interface()
 
-print(interface.getController().alocarTurmasSalas("chp", "Microsoft"))
+interface.getController().alocarTurmasSalas("chp", "Microsoft")
 while (interface.mainLoop()):
     os.system("cls")
 

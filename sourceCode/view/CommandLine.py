@@ -61,23 +61,28 @@ class Interface:
             divide = value.split("*")
             for position in range(0, int(divide[1])):
                 pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
-        if (not self.controller.novoPedido(idEstudante, pedido)):
+        codigoRetorno = self.controller.novoPedido(idEstudante, pedido)
+        if codigoRetorno == 0:
+            print("Estudante não encontrado")
+        elif codigoRetorno == -1:
             print("Erro! Turma nao alocada em sala")
+        elif codigoRetorno == -2:
+            print("Impossivel fazer pedido, fora do horário permitido")
+        elif codigoRetorno == 1:
+            print("Pedido Realizado com sucesso!")
 
     def mainLoop(self):
         idEstudante = self.inserirIdEstudante()
-        if (idEstudante == ""):
+        if idEstudante == "":
             return False
-        estudante = self.controller.buscaEstudante(idEstudante)
-        if (not estudante):
+        estudante = self.controller.buscaEstudante(int(idEstudante))
+        if not estudante:
             print("Estudante nao encontrado!")
             print("[1] - Inserir novo estudante\n[] - Buscar novamente")
             selecao = input()
-            if (selecao == "1"):
+            if selecao == "1":
                 idEstudante = self.cadastrarEstudante()
                 self.realizarPedido(idEstudante)
-            else:
-                self.mainLoop()
         else:
             print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[] - Sair")
             entrada = input()
