@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.3 (C:\Users\ftiti\AppData\Local\Programs\Python\Python36-32\python.exe)" project-jdk-type="Python SDK" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.1 (C:\Users\chp54125\AppData\Local\Programs\Python\Python36\python.exe)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.2 (C:\Users\chp54125\AppData\Local\Programs\Python\Python36-32\python.exe)" project-jdk-type="Python SDK" />
+>>>>>>> b9be4afa2b602367bdc8a9bb6853217f2bc80028
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.2 (C:\Users\chp54125\AppData\Local\Programs\Python\Python36-32\python.exe)" project-jdk-type="Python SDK" />
+>>>>>>> b9be4afa2b602367bdc8a9bb6853217f2bc80028
+>>>>>>> f169ade5fa721286792f2ac5fe862c664502a561
 </project>
