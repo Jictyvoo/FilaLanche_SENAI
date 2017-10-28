@@ -5,8 +5,8 @@ import os
 
 interface = Interface()
 
-interface.getController().alocarTurmasSalas("chp", "Microsoft")
 while (interface.mainLoop()):
     os.system("cls")
 
 interface.getController().registrarLucro()
+interface.getController().registrarPedidos()

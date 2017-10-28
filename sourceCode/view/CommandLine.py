@@ -10,7 +10,7 @@ class Interface:
 
     def inserirIdEstudante(self):
         print("Insira o ID do Estudante:")
-        idEstudante = str(input())
+        idEstudante = str(input("__.> "))
         return idEstudante
 
     def cadastrarEstudante(self):
@@ -22,7 +22,7 @@ class Interface:
             try:
                 os.system("cls || clear")
                 print("Insira o ID do Estudante")
-                idEstudante = int(input())
+                idEstudante = int(input("__.> "))
                 wrongInput = False
             except(ValueError):
                 wrongInput = True
@@ -31,7 +31,7 @@ class Interface:
             try:
                 os.system("cls || clear")
                 print("Insira a turma do Estudante")
-                turmaEstudante = str(input())
+                turmaEstudante = str(input("__.> "))
                 wrongInput = False
             except():
                 wrongInput = True
@@ -40,7 +40,7 @@ class Interface:
             try:
                 os.system("cls || clear")
                 print("Insira o nome do Estudante")
-                nomeEstudante = str(input())
+                nomeEstudante = str(input("__.> "))
                 wrongInput = False
             except():
                 wrongInput = True
@@ -51,20 +51,22 @@ class Interface:
 
     def realizarPedido(self, idEstudante):
         for index, value in enumerate(self.controller.getTodosProdutos()):
-            print("[" + str(index) + "] - " + value.getNome() + " -- R$" + str(value.getPreco()))
+            if value.getQuantidade() > 0:
+                print("[" + str(index) + "] - " + value.getNome() + " -- R$" + str(value.getPreco()))
         print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
-        entrada = input()
+        entrada = input("__.> ")
 
         pedido = self.controller.analisaLinhaPedidos(entrada)
-        codigoRetorno = self.controller.novoPedido(idEstudante, pedido)
-        if codigoRetorno == 0:
-            print("Estudante não encontrado")
-        elif codigoRetorno == -1:
-            print("Erro! Turma nao alocada em sala")
-        elif codigoRetorno == -2:
-            print("Impossivel fazer pedido, fora do horário permitido")
-        elif codigoRetorno == 1:
-            print("Pedido Realizado com sucesso!")
+        if len(pedido) >= 1:
+            codigoRetorno = self.controller.novoPedido(idEstudante, pedido)
+            if codigoRetorno == 0:
+                print("Estudante não encontrado")
+            elif codigoRetorno == -1:
+                print("Erro! Turma nao alocada em sala")
+            elif codigoRetorno == -2:
+                print("Impossivel fazer pedido, fora do horário permitido")
+            elif codigoRetorno == 1:
+                print("Pedido Realizado com sucesso!")
 
     def mainLoop(self):
         idEstudante = self.inserirIdEstudante()
@@ -74,7 +76,7 @@ class Interface:
         if not estudante:
             print("Estudante nao encontrado!")
             print("[1] - Inserir novo estudante\n[] - Buscar novamente")
-            selecao = input()
+            selecao = input("__.> ")
             if selecao == "1":
                 idEstudante = self.cadastrarEstudante()
                 self.realizarPedido(idEstudante)
@@ -91,7 +93,10 @@ class Interface:
             elif entrada == "3":
                 turma = str(input("Digite a turma: "))
                 sala = str(input("Digite a sala alocada: "))
-                self.controller.alocarTurmasSalas(turma, sala)
+                if self.controller.alocarTurmasSalas(turma, sala):
+                    print("Turma Alocada com sucesso!")
+                else:
+                    print("Nao foi possivel alocar a turma na sala " + sala)
         return True
 
     def getController(self):
