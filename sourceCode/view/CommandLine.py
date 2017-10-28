@@ -59,7 +59,10 @@ class Interface:
         pedido = []
         for index, value in enumerate(analisa):
             divide = value.split("*")
-            for position in range(0, int(divide[1])):
+            if len(divide) > 1:
+                for position in range(0, int(divide[1])):
+                    pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
+            else:
                 pedido.append(self.controller.getTodosProdutos()[int(divide[0])])
         codigoRetorno = self.controller.novoPedido(idEstudante, pedido)
         if codigoRetorno == 0:
@@ -84,19 +87,19 @@ class Interface:
                 idEstudante = self.cadastrarEstudante()
                 self.realizarPedido(idEstudante)
         else:
-            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[] - Sair")
-            entrada = input()
-            if (entrada == "1"):
-                id = int(input("Digite o id "))
+            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[3] - Alocar Salas\n[] - Sair")
+            entrada = input("__.> ")
+            if entrada == "1":
+                idEstudante = int(input("Digite o id "))
                 nome = str(input("Digite o nome "))
                 turma = str(input("Digite a turma "))
-                sala = str(input("Digite a sala alocada : "))
-                self.controller.modificarEstudante(turma, int(id), nome)
-                self.controller.alocarTurmasSalas(turma,sala)
-            elif (entrada == "2"):
-                self.realizarPedido(idEstudante)
-            else:
-                self.mainLoop()
+                self.controller.modificarEstudante(turma, int(idEstudante), nome)
+            elif entrada == "2":
+                self.realizarPedido(int(idEstudante))
+            elif entrada == "3":
+                turma = str(input("Digite a turma: "))
+                sala = str(input("Digite a sala alocada: "))
+                self.controller.alocarTurmasSalas(turma, sala)
         return True
 
     def getController(self):
