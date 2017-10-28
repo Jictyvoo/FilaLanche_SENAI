@@ -11,11 +11,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainController.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainController.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sourceCode/controller/MainController.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <state relative-caret-position="176">
+              <caret line="36" column="59" lean-forward="false" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
+=======
             <state relative-caret-position="-1581">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+            <state relative-caret-position="-1581">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+            <state relative-caret-position="-1581">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -23,11 +38,49 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
               <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <file leaf-file-name="Sala.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sourceCode/model/Sala.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+=======
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
               <folding>
                 <element signature="e#75#96#0" expanded="true" />
               </folding>
@@ -37,12 +90,57 @@
       </file>
       <file leaf-file-name="Interface.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sourceCode/view/Interface.py">
+<<<<<<< HEAD
+<<<<<<< HEAD
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="414">
+              <caret line="64" column="50" lean-forward="false" selection-start-line="64" selection-start-column="50" selection-end-line="64" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pedido.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sourceCode/model/Pedido.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Item.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sourceCode/model/Item.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+            <state relative-caret-position="119">
+              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="188">
               <caret line="85" column="66" lean-forward="true" selection-start-line="85" selection-start-column="66" selection-end-line="85" selection-end-column="66" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="119">
+              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+              <folding />
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
             </state>
           </provider>
         </entry>
@@ -88,10 +186,21 @@
         <option value="$PROJECT_DIR$/model/Sala.py" />
         <option value="$PROJECT_DIR$/model/Estudante.py" />
         <option value="$PROJECT_DIR$/controller/MainController.py" />
+<<<<<<< HEAD
+=======
         <option value="$PROJECT_DIR$/sourceCode/controller/MainController.py" />
         <option value="$PROJECT_DIR$/sourceCode/view/Interface.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/sourceCode/view/Graphics.py" />
         <option value="$PROJECT_DIR$/sourceCode/view/Main.py" />
+=======
+        <option value="$PROJECT_DIR$/sourceCode/view/Main.py" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+        <option value="$PROJECT_DIR$/sourceCode/view/Graphics.py" />
+        <option value="$PROJECT_DIR$/sourceCode/view/Main.py" />
+        <option value="$PROJECT_DIR$/sourceCode/view/Interface.py" />
+        <option value="$PROJECT_DIR$/sourceCode/controller/MainController.py" />
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
       </list>
     </option>
   </component>
@@ -116,8 +225,21 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
       <pane id="Scope" />
       <pane id="Scratches" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+      <pane id="Scope" />
+      <pane id="Scratches" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+      <pane id="Scope" />
+      <pane id="Scratches" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,6 +286,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,19 +385,51 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23970588" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24011713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24011713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753164" sideWeight="0.5029412" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32753164" sideWeight="0.4970588" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -299,7 +455,69 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+<<<<<<< HEAD
             <element signature="e#0#11#0" expanded="true" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#75#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/model/Pedido.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/model/Item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/controller/MainController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+=======
+            <element signature="e#0#12#0" expanded="true" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+            <element signature="e#0#12#0" expanded="true" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+            <element signature="e#0#12#0" expanded="true" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
           </folding>
         </state>
       </provider>
@@ -308,9 +526,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
           <caret line="83" column="26" lean-forward="false" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
         </state>
       </provider>
     </entry>
@@ -336,6 +569,46 @@
     <entry file="file://$PROJECT_DIR$/model/Pedido.py" />
     <entry file="file://$PROJECT_DIR$/model/Estudante.py" />
     <entry file="file://$PROJECT_DIR$/controller/MainController.py" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="83" column="26" lean-forward="false" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/model/Item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/model/Pedido.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#75#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-33489">
@@ -355,21 +628,96 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sourceCode/view/Interface.py">
+<<<<<<< HEAD
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="188">
           <caret line="85" column="66" lean-forward="true" selection-start-line="85" selection-start-column="66" selection-end-line="85" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="119">
+          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+          <folding />
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+=======
+        <state relative-caret-position="154">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/model/Sala.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="64" column="50" lean-forward="false" selection-start-line="64" selection-start-column="50" selection-end-line="64" selection-end-column="50" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sourceCode/controller/MainController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="36" column="59" lean-forward="false" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+=======
     <entry file="file://$PROJECT_DIR$/sourceCode/view/Graphics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="154">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
+=======
+    <entry file="file://$PROJECT_DIR$/sourceCode/view/Graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+>>>>>>> 953ba7787e5595f0ba4dce14481c050b49cbb1e8
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+>>>>>>> c3201bf4d60aad7cc605f8e014b17ac6d32b7b8b
           </folding>
         </state>
       </provider>
