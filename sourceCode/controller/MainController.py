@@ -82,9 +82,8 @@ class MainController:
         now = time.localtime()  # pega o tempo atual
         tempo = str(time.asctime(now)).split(" ")  # converte o tempo atual para uma string e separa em um vetor
 
-        horarioAtual = tempo[3].replace(":", "-")[0:5].split(
-            "-")  # separa novamente em um vetor selecionando o que quer
-        horarioNecessario = horarioSala.split('-')  # separa o horario necessario no vetor pelo que se quer
+        horarioAtual = tempo[4][0:5].split(":")  # separa novamente em um vetor selecionando o que quer
+        horarioNecessario = horarioSala.split(':')  # separa o horario necessario no vetor pelo que se quer
 
         minutoAtual = (int(horarioAtual[1]) + (int(horarioAtual[0]) * 60))  # converte as horas e minutos para minutos
         minutoNecessario = (int(horarioNecessario[1]) + (int(horarioNecessario[0]) * 60))  # idem linha anterior
@@ -144,8 +143,6 @@ class MainController:
                 self.itensPreVenda[index].getQuantidade() - self.itens[
                     index].getQuantidade())) + "\n")  # calcula a diferenca dos itens existentes com os vendidos e armazena o valor arrecadado
         arquivoLucro.close()
-
-
 
     def registrarPedidos(self):  # metodo que registra os produtos para a venda - assemelha-se ao registrarLucro()
         arquivoPedidos = open(
