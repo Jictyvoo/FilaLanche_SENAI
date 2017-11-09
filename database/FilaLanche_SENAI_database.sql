@@ -39,6 +39,13 @@ FOREIGN KEY(id_produto) REFERENCES Produto(id_produto),
 FOREIGN KEY(matricula) REFERENCES Estudante(matricula)
 );
 
+CREATE TABLE if not exists Lucro(
+id_lucro int not null auto_increment,
+data date not null,
+valor float not null,
+primay key(id_lucro)
+);
+
 load data local infile 'produtos.csv' into table Produto fields terminated by ';' (nome, preco, quantidade);
 
 load data local infile 'salas.csv' into table Sala_Horario fields terminated by ';' (nome_sala, noite);

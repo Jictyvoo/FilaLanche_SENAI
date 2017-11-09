@@ -145,6 +145,8 @@ class MainController:
                     index].getQuantidade())) + "\n")  # calcula a diferenca dos itens existentes com os vendidos e armazena o valor arrecadado
         arquivoLucro.close()
 
+
+
     def registrarPedidos(self):  # metodo que registra os produtos para a venda - assemelha-se ao registrarLucro()
         arquivoPedidos = open(
             "../../lucros/pedidosCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[

@@ -93,3 +93,35 @@ class DatabaseController:
                 return -2  # retorna -2 se nao estiver no horario de compra da sala
         else:  # caso encontre uma excessao de acesso ao dicionario atraves de uma chave inexistente
             return 0
+
+        def registrarLucro(self):  # metodo para registar o lucro obtido no dia
+            arquivoLucro = open(
+                "../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[
+                                                 0:10] + ".csv", "w")  # cria o arquivo com o nome baseado no tempo
+            arquivoLucro.write("Nome Produto; Valor Arreacadado\n")
+            for index in range(0, len(self.itens)):  # percorre a lista de itens para armazenar os dados
+                arquivoLucro.write(self.itens[index].getNome() + ";" + str(self.itens[index].getPreco() * (
+                    self.itensPreVenda[index].getQuantidade() - self.itens[
+                        index].getQuantidade())) + "\n")  # calcula a diferenca dos itens existentes com os vendidos e armazena o valor arrecadado
+            arquivoLucro.close()
+
+        def registrarLucro(self,listaProdutos):
+            self.cursor.execute('select id_produto from Pedido where data_horario = curdate()')
+            ids = self.cursor.fetchall()
+            self.cursor.execute('select quantidade from Pedido where data_horario = curdate()')
+            qtd = self.cursor.fetchall()
+            lucro = 0
+            for i in enumerate(ids):
+                self.cursor.execute('select id_produto from Produto where id_produto = ids[i]')
+                preco = self.cursor.fechone()
+                lucro = preco*qtd[i]
+
+
+
+
+
+
+
+            self.cursor.execute('insert into table Lucro(data,valor) values(curdate(),?)',valor)
+            self.cursor.commit()
+
