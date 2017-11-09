@@ -108,39 +108,20 @@ class DatabaseController:
         else:  # caso encontre uma excessao de acesso ao dicionario atraves de uma chave inexistente
             return 0
 
-<<<<<<< HEAD
-        def registrarLucro(self):  # metodo para registar o lucro obtido no dia
-            arquivoLucro = open(
-                "../../lucros/lucroCantina---" + time.asctime(time.localtime()).replace(" ", "-").replace(":", "-")[
-                                                 0:10] + ".csv", "w")  # cria o arquivo com o nome baseado no tempo
-            arquivoLucro.write("Nome Produto; Valor Arreacadado\n")
-            for index in range(0, len(self.itens)):  # percorre a lista de itens para armazenar os dados
-                arquivoLucro.write(self.itens[index].getNome() + ";" + str(self.itens[index].getPreco() * (
-                    self.itensPreVenda[index].getQuantidade() - self.itens[
-                        index].getQuantidade())) + "\n")  # calcula a diferenca dos itens existentes com os vendidos e armazena o valor arrecadado
-            arquivoLucro.close()
+    def registrarLucro(self):
+        self.cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')
+        pedidos = self.cursor.fetchall()
+        lucroTotal = 0
+        dicionarioLucrosPorProduto = {}
+        for linhas in pedidos:
+            self.cursor.execute('select preco from Produto where id_produto = ? ', linhas[0])
+            preco = self.cursor.fechone()
+            lucro = float(preco[0]) * int(linhas[1])
+            dicionarioLucrosPorProduto[str(linhas[0])] = lucro
+            lucroTotal += lucro
 
-        def registrarLucro(self,listaProdutos):
-            self.cursor.execute('select id_produto from Pedido where data_horario = curdate()')
-            ids = self.cursor.fetchall()
-            self.cursor.execute('select quantidade from Pedido where data_horario = curdate()')
-            qtd = self.cursor.fetchall()
-            lucro = 0
-            for i in enumerate(ids):
-                self.cursor.execute('select id_produto from Produto where id_produto = ids[i]')
-                preco = self.cursor.fechone()
-                lucro = preco*qtd[i]
+        dicionarioLucrosPorProduto['total'] = lucroTotal
 
-
-
-
-
-
-
-            self.cursor.execute('insert into table Lucro(data,valor) values(curdate(),?)',valor)
-            self.cursor.commit()
-
-=======
     def alocarTurmasSalas(self, turma, idSala):  # metodo para alocar as turmas a uma sala
         self.cursor.execute('update table Estudante set id_sala = ? where turma = ?', idSala, turma)
         self.cursor.commit()
@@ -154,7 +135,7 @@ class DatabaseController:
         pedido = []  # cria lista de pedidos
         for index, value in enumerate(analisa):  # percorre o vetor com cada item individualmente
             divide = value.split("*")
-            #pedido.append(divide)
+            # pedido.append(divide)
             if divide[0] != '':
                 if int(divide[0]) < len(self.getTodosProdutos()):  # veirifica se o id esta dentro do padrao:
                     produtoAdicionado = self.getProduto(int(divide[0]))
@@ -166,4 +147,3 @@ class DatabaseController:
                         else:
                             pedido.append(value.replace("*", ";"))  # caso so tenha um item, adiciona apenas 1 item
         return pedido  # retorna o pedido realizado
->>>>>>> b8a4fbbcb5442b5a2af8416e8c9aca25013c28f2
