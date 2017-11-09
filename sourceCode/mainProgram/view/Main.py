@@ -1,7 +1,8 @@
 # arquivo da view do programa para criar a visualizacao do sistema em si
 
-from sourceCode.view.CommandLine import Interface
 import os
+
+from sourceCode.mainProgram.view.CommandLine import Interface
 
 interface = Interface()
 

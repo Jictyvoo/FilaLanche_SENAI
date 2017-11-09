@@ -1,12 +1,11 @@
-from sourceCode.controller.MainController import MainController
 import os
+
+from sourceCode.mainProgram.controller.DatabaseController import DatabaseController
 
 
 class Interface:
     def __init__(self):
-        self.controller = MainController()
-        self.controller.carregarProdutosEmEstoque()
-        self.controller.carregarSalas()
+        self.controller = DatabaseController()
 
     def inserirIdEstudante(self):
         print("Insira o ID do Estudante:")
@@ -44,7 +43,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
-        self.controller.novoEstudante(nomeEstudante, idEstudante, turmaEstudante)
+        self.controller.cadastrarEstudante(nomeEstudante, idEstudante, turmaEstudante, data_nascimento="")
         os.system("cls || clear")
         print("Cadastro realizado com sucesso!")
         return idEstudante
@@ -72,7 +71,7 @@ class Interface:
         idEstudante = self.inserirIdEstudante()
         if idEstudante == "":
             return False
-        estudante = self.controller.buscaEstudante(int(idEstudante))
+        estudante = self.controller.getEstudante(int(idEstudante))
         if not estudante:
             print("Estudante nao encontrado!")
             print("[1] - Inserir novo estudante\n[] - Buscar novamente")
