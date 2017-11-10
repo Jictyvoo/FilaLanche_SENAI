@@ -16,6 +16,7 @@ class Interface:
         turmaEstudante = ""
         idEstudante = 0
         nomeEstudante = ""
+        data_nascimento = "00-00-00"
         wrongInput = True
         while (wrongInput):
             try:
@@ -43,7 +44,15 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
-        self.controller.cadastrarEstudante(nomeEstudante, idEstudante, turmaEstudante, data_nascimento="")
+        while(wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Digite a sua data de nascimento! Exemplo : DD-MM-YYYY")
+                data_nascimento = str(input("__.> "))
+                wrongInput = False
+            except():
+                wrongInput= True
+        self.controller.cadastrarEstudante(nomeEstudante, idEstudante, turmaEstudante, data_nascimento)
         os.system("cls || clear")
         print("Cadastro realizado com sucesso!")
         return idEstudante

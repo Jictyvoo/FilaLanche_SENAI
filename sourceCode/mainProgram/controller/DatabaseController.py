@@ -1,9 +1,9 @@
 import MySQLdb
 from datetime import datetime
 
-
 class DatabaseController:
     def __init__(self):
+        print(self.criarBancoDeDados())
         self.conexao = MySQLdb.connect('localhost', 'root', 'sqlpassword')
         self.conexao.select_db('Fila_Lanche_SENAI')
         self.cursor = self.conexao.cursor()
@@ -13,8 +13,12 @@ class DatabaseController:
         return self.cursor.dictfetchall()
 
     def cadastrarEstudante(self, nome, id, turma, data_nascimento):  # metodo para instanciar um novo estudante
-        self.cursor.execute('insert into Estudante values(?, ?, ?, ?)', id, nome, turma, data_nascimento)
-        self.cursor.commit()
+        dia, mes, ano = data_nascimento.split("-")
+        ano = datetime.date(int(ano), int(mes), int(dia))
+        self.cursor.execute(
+            'insert into Estudante(matricula,nome,turma,data_nascimento) values("%d", "%s","%s","%s")' % (
+                id, nome, turma, ano))
+        self.conexao.commit()
 
     def getEstudante(self, idEstudante):
         self.cursor.execute('select * from Estudante where matricula = ?', idEstudante)
@@ -147,3 +151,22 @@ class DatabaseController:
                         else:
                             pedido.append(value.replace("*", ";"))  # caso so tenha um item, adiciona apenas 1 item
         return pedido  # retorna o pedido realizado
+
+    def criarBancoDeDados(self):
+        ref_arquivo = open("../../../database/FilaLanche_SENAI_database.sql", "r")
+        linhasCriacao = []
+        for linha in ref_arquivo:  # um laco eterno de um python sem do while
+            linha = linha.replace("\n", "")  # apaga o '\n' do final da linha
+            linhasCriacao.append(linha)
+
+        comandos = []
+        tempComando = ""
+        for index, value in enumerate(linhasCriacao):
+            tempComando = tempComando + value + " "
+            tamanho = len(value) - 1
+            if tamanho > 1:
+                if value[tamanho] == ";":
+                    comandos.append(tempComando)
+                    tempComando = ""
+
+        return comandos
