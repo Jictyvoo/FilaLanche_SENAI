@@ -3,10 +3,10 @@ from datetime import datetime
 
 class DatabaseController:
     def __init__(self):
-        print(self.criarBancoDeDados())
-        self.conexao = MySQLdb.connect('localhost', 'root', 'sqlpassword')
-        self.conexao.select_db('Fila_Lanche_SENAI')
+        self.conexao = MySQLdb.connect('localhost', 'root', '')
         self.cursor = self.conexao.cursor()
+        self.carregarSQL()
+        self.conexao.select_db('Fila_Lanche_SENAI')
 
     def getTodosProdutos(self):
         self.cursor.execute('select * from Produto')
@@ -14,10 +14,9 @@ class DatabaseController:
 
     def cadastrarEstudante(self, nome, id, turma, data_nascimento):  # metodo para instanciar um novo estudante
         dia, mes, ano = data_nascimento.split("-")
-        ano = datetime.date(int(ano), int(mes), int(dia))
         self.cursor.execute(
             'insert into Estudante(matricula,nome,turma,data_nascimento) values("%d", "%s","%s","%s")' % (
-                id, nome, turma, ano))
+                id, nome, turma, ano + "-" + mes + "-" + dia))
         self.conexao.commit()
 
     def getEstudante(self, idEstudante):
@@ -152,7 +151,7 @@ class DatabaseController:
                             pedido.append(value.replace("*", ";"))  # caso so tenha um item, adiciona apenas 1 item
         return pedido  # retorna o pedido realizado
 
-    def criarBancoDeDados(self):
+    def carregarSQL(self):
         ref_arquivo = open("../../../database/FilaLanche_SENAI_database.sql", "r")
         linhasCriacao = []
         for linha in ref_arquivo:  # um laco eterno de um python sem do while
