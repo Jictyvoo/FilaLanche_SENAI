@@ -20,47 +20,47 @@ class DatabaseController:
         self.conexao.commit()
 
     def getEstudante(self, idEstudante):
-        self.cursor.execute('select * from Estudante where matricula = ?', idEstudante)
+        self.cursor.execute('select * from Estudante where matricula = "%d"' % idEstudante)
         return self.cursor.dictfetchall()
 
     def cadastrarSala(self, nome_sala, ocupado, noite, manha,
                       tarde):  # metodo para instanciar um novo estudante
         self.cursor.execute(
-            'insert into Sala_Horario(nome_sala, ocupado, noite, manha, tarde) values(?, ?, ?, ?, ?)', nome_sala,
-            ocupado, noite, manha, tarde)
+            'insert into Sala_Horario(nome_sala, ocupado, noite, manha, tarde) values("%s", "%s", "%s", "%s", "%s")' % (nome_sala,
+            ocupado, noite, manha, tarde))
         self.cursor.commit()
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controller
-        self.cursor.execute('select * from Sala_Horario where id_sala = ? and ocupado = NULL', idSala)
+        self.cursor.execute('select * from Sala_Horario where id_sala = "%d" and ocupado = NULL' % idSala)
         return self.cursor.fetchone()
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.cursor.execute(
-            'insert into Produto(nome, preco, quantidade) values(?, ?, ?)', nome, preco, quantidade)
+            'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % nome, preco, quantidade)
         self.cursor.commit()
 
     def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controller
-        self.cursor.execute('select * from Produto where id_produto = ?', id_produto)
+        self.cursor.execute('select * from Produto where id_produto = "%d"' % id_produto)
         return self.cursor.fetchone()
 
     def modificarEstudante(self, id, nome, turma):  # metodo para modificar os estudantes
-        self.cursor.execute('update table Estudante set nome = ?, turma = ? where matricula = ?', nome, turma, id)
+        self.cursor.execute('update table Estudante set nome = "%s", turma = "%s" where matricula = "%d"' % nome, turma, id)
 
     def modificarSala(self, id_sala, nome_sala, ocupado, noite, manha, tarde):  # metodo para modificar as salas
         self.cursor.execute(
-            'update table Sala_Horario set nome_sala = ?, ocupado = ?, noite = ?, manha = ?, tarde = ? where id_sala = ?',
+            'update table Sala_Horario set nome_sala = "%s", ocupado = "%s", noite = "%s", manha = "%s", tarde = "%s" where id_sala = "%s"' %
             nome_sala, ocupado, noite, manha, tarde, id_sala)
 
     def modificarProduto(self, id_produto, nome, preco, quantidade):  # metodo para modificar os itens
-        self.cursor.execute('update table Produto set nome = ?, preco = ?, quantidade where matricula = ?', nome, preco,
+        self.cursor.execute('update table Produto set nome = "%s", preco = "%f", quantidade where matricula = "%d"' % nome, preco,
                             quantidade, id_produto)
 
     def vendeProduto(self, listaDeProdutos):  # metodo para remover itens existentes
         for (index, value) in enumerate(listaDeProdutos):
             informacao = value.split(";")
-            self.cursor.execute('select quantidade from Produto where id_produto = ?', informacao[0])
+            self.cursor.execute('select quantidade from Produto where id_produto = "%d"' % informacao[0])
             quantidadeAnterior = self.cursor.fetchone()[0]
-            self.cursor.execute('update table Produto set quantidade = ? where id_produto = ?',
+            self.cursor.execute('update table Produto set quantidade = "%d" where id_produto = "%d"' %
                                 int(quantidadeAnterior) - int(informacao[1]), informacao[0])
             self.cursor.commit()
 
@@ -92,7 +92,7 @@ class DatabaseController:
                 turno = 3
 
             turmaEncontrada = foundedStudent['turma']  # pega a turma do estudante
-            self.cursor.execute('select * from Sala_Horario where ocupado = ?', turmaEncontrada)
+            self.cursor.execute('select * from Sala_Horario where ocupado = "%s"' % turmaEncontrada)
             horarioTurno = self.cursor.fetchone()
             if len(horarioTurno) == 0:
                 return -1  # retorna o codigo referente ao fato da turma nao estar em sala alguma
@@ -101,8 +101,8 @@ class DatabaseController:
             if self.podeComprar(horarioSala):  # verifica se o horario permite compra de item
                 for index, value in enumerate(listaProdutos):
                     produto = value.split[";"]
-                    self.cursor.execute('insert into Pedido values(?, ?, curdate(), ?)', produto[0], idEstudante,
-                                        produto[1])
+                    self.cursor.execute('insert into Pedido values("%s", "%d", curdate(), "%s")' % (produto[0], idEstudante,
+                                        produto[1]))
                     self.cursor.commit()
                 self.vendeProduto(listaProdutos)  # utiliza o metodo de venda para remover os produtos disponiveis
                 return 1  # retorna 1 se houver sucesso
@@ -117,7 +117,7 @@ class DatabaseController:
         lucroTotal = 0
         dicionarioLucrosPorProduto = {}
         for linhas in pedidos:
-            self.cursor.execute('select preco from Produto where id_produto = ? ', linhas[0])
+            self.cursor.execute('select preco from Produto where id_produto = "%d" ' % linhas[0])
             preco = self.cursor.fechone()
             lucro = float(preco[0]) * int(linhas[1])
             dicionarioLucrosPorProduto[str(linhas[0])] = lucro
@@ -126,9 +126,9 @@ class DatabaseController:
         dicionarioLucrosPorProduto['total'] = lucroTotal
 
     def alocarTurmasSalas(self, turma, idSala):  # metodo para alocar as turmas a uma sala
-        self.cursor.execute('update table Estudante set id_sala = ? where turma = ?', idSala, turma)
+        self.cursor.execute('update table Estudante set id_sala = "%d" where turma = "%s"' % idSala, turma)
         self.cursor.commit()
-        self.cursor.execute('update table Sala_Horario set ocupado = ? where id_sala = ?', turma, idSala)
+        self.cursor.execute('update table Sala_Horario set ocupado = "%s" where id_sala = "%d"' % turma, idSala)
         self.cursor.commit()
 
     def analisaLinhaPedidos(self, entrada):  # metodo que analisa a linha de pedidos feitos
