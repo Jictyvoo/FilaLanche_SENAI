@@ -39,6 +39,6 @@ FOREIGN KEY(id_produto) REFERENCES Produto(id_produto),
 FOREIGN KEY(matricula) REFERENCES Estudante(matricula)
 );
 
-load data local infile 'produtos.csv' into table Produto fields terminated by ';' (nome, preco, quantidade);
+load data local infile 'C:/Users/ftiti/Desktop/FilaLanche_SENAI/sourceCode/entradas/produtos.csv' into table Produto fields terminated by ';' (nome, preco, quantidade);
 
-load data local infile 'salas.csv' into table Sala_Horario fields terminated by ';' (nome_sala, noite);
+load data local infile 'C:/Users/ftiti/Desktop/FilaLanche_SENAI/sourceCode/entradas/salas.csv' into table Sala_Horario fields terminated by ';' (nome_sala, noite);

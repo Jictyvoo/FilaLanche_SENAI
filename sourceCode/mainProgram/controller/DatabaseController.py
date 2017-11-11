@@ -5,6 +5,7 @@ class DatabaseController:
     def __init__(self):
         self.conexao = MySQLdb.connect('localhost', 'root', '')
         self.cursor = self.conexao.cursor()
+        self.executarSQL()
         self.carregarSQL()
         self.conexao.select_db('Fila_Lanche_SENAI')
 
@@ -163,9 +164,35 @@ class DatabaseController:
         for index, value in enumerate(linhasCriacao):
             tempComando = tempComando + value + " "
             tamanho = len(value) - 1
-            if tamanho > 1:
+            if tamanho > 0:
                 if value[tamanho] == ";":
                     comandos.append(tempComando)
                     tempComando = ""
 
         return comandos
+
+    def executarSQL(self):
+        comandos = self.carregarSQL()
+        for i,value in enumerate(comandos):
+            self.cursor.execute(value)
+
+    def carregarSalas(self):
+        ref_arquivo = open("../entradas/salas.csv", "r")  # abre o arquivo em modo leitura
+        while True:  # um laco eterno de um python sem do while
+            linha = ref_arquivo.readline().split(';')  # divide a linha pelos ';'
+            if len(linha) == 2:  # verifica se a linha contem apenas os 2 itens necessarios
+                linha[1] = linha[1].replace("\n", "")  # apaga o '\n' do final da linha
+                self.cursor.execute('insert into Sala(nome_sala, noite) values("%s", "%s")' % (linha[0], linha[1] + ":00"))
+                self.conexao.commit()
+            else:
+                return
+
+    def carregarProdutosEmEstoque(self):  # le o arquivo de entrada para armazenar os dados do produto
+        arquivoProdutos = open("../entradas/produtos.csv", "r")  # abre o arquivo para leitura
+        while True:  # um laco eterno de um python sem do while
+            linha = arquivoProdutos.readline().split(';')  # separa cada linha por ';'
+            if len(linha) == 3:  # verifica se a linha possui 3 itens, nome, preco e quantidade
+                linha[2] = linha[2].replace("\n", "")  # apaga os '\n' lidos no final da linha
+                self.cursor.execute('insert into Produto(nome_produto, preco, quantidade) values("%s", "%f", "%d")' % (linha[0], float(linha[1]), int(linha[2])))
+            else:
+                return
