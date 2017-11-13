@@ -84,6 +84,7 @@ class DatabaseController:
         minutoNecessario = (int(horarioNecessario[1]) + (int(horarioNecessario[0]) * 60))  # idem linha anterior
 
         pode = minutoNecessario - minutoAtual  # subtrai os minutos para verificar a diferenca de horario
+        print(pode)
         if pode <= 20 and pode >= 10:  # verifica se esta dentro do horario permitido
             return True
         return False
