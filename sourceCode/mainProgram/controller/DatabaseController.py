@@ -34,8 +34,8 @@ class DatabaseController:
                       tarde):  # metodo para instanciar um novo estudante
         self.cursor.execute(
             'insert into Sala_Horario(nome_sala, ocupado, noite, manha, tarde) values("%s", "%s", "%s", "%s", "%s")' % (
-            nome_sala,
-            ocupado, noite, manha, tarde))
+                nome_sala,
+                ocupado, noite, manha, tarde))
         self.conexao.commit()
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controller
@@ -52,28 +52,28 @@ class DatabaseController:
         return self.cursor.fetchone()
 
     def modificarEstudante(self, id, nome, turma):  # metodo para modificar os estudantes
-        self.cursor.execute('update table Estudante set nome = "%s", turma = "%s" where matricula = "%d"' % nome, turma,
+        self.cursor.execute('update Estudante set nome = "%s", turma = "%s" where matricula = "%d"' % nome, turma,
                             id)
         self.conexao.commit()
 
     def modificarSala(self, id_sala, nome_sala, ocupado, noite, manha, tarde):  # metodo para modificar as salas
         self.cursor.execute(
-            'update table Sala_Horario set nome_sala = "%s", ocupado = "%s", noite = "%s", manha = "%s", tarde = "%s" where id_sala = "%s"' %
+            'update Sala_Horario set nome_sala = "%s", ocupado = "%s", noite = "%s", manha = "%s", tarde = "%s" where id_sala = "%s"' %
             nome_sala, ocupado, noite, manha, tarde, id_sala)
         self.conexao.commit()
 
     def modificarProduto(self, id_produto, nome, preco, quantidade):  # metodo para modificar os itens
         self.cursor.execute(
-            'update table Produto set nome = "%s", preco = "%f", quantidade where matricula = "%d"' % nome, preco,
+            'update Produto set nome = "%s", preco = "%f", quantidade where matricula = "%d"' % nome, preco,
             quantidade, id_produto)
         self.conexao.commit()
 
     def vendeProduto(self, listaDeProdutos):  # metodo para remover itens existentes
         for (index, value) in enumerate(listaDeProdutos):
             informacao = value.split(";")
-            self.cursor.execute('select quantidade from Produto where id_produto = "%d"' % informacao[0])
+            self.cursor.execute('select quantidade from Produto where id_produto = "%d"' % int(informacao[0]))
             quantidadeAnterior = self.cursor.fetchone()[0]
-            self.cursor.execute('update table Produto set quantidade = "%d" where id_produto = "%d"' %
+            self.cursor.execute('update Produto set quantidade = "%d" where id_produto = "%d"' %
                                 (int(quantidadeAnterior) - int(informacao[1]), int(informacao[0])))
             self.conexao.commit()
 
@@ -113,7 +113,7 @@ class DatabaseController:
 
             if self.podeComprar(horarioSala):  # verifica se o horario permite compra de item
                 for index, value in enumerate(listaProdutos):
-                    produto = value.split[";"]
+                    produto = value.split(";")
                     self.cursor.execute(
                         'insert into Pedido values("%s", "%d", curdate(), "%s")' % (produto[0], idEstudante,
                                                                                     produto[1]))
@@ -132,7 +132,7 @@ class DatabaseController:
         dicionarioLucrosPorProduto = {}
         for linhas in pedidos:
             self.cursor.execute('select preco from Produto where id_produto = "%d" ' % linhas[0])
-            preco = self.cursor.fechone()
+            preco = self.cursor.fetchone()
             lucro = float(preco[0]) * int(linhas[1])
             dicionarioLucrosPorProduto[str(linhas[0])] = lucro
             lucroTotal += lucro
@@ -167,8 +167,7 @@ class DatabaseController:
                         if len(value.split("*")) > 1:
                             pedido.append(value.replace("*", ";"))  # caso so tenha um item, adiciona apenas 1 item
                         else:
-                            pedido.append(
-                                value.replace("*", ";") + ";1")  # caso so tenha um item, adiciona apenas 1 item
+                            pedido.append(value + ";1")  # caso so tenha um item, adiciona apenas 1 item
         return pedido  # retorna o pedido realizado
 
     def carregarSQL(self, arquivo_sql):
@@ -214,6 +213,6 @@ class DatabaseController:
             if len(linha) == 3:  # verifica se a linha possui 3 itens, nome, preco e quantidade
                 linha[2] = linha[2].replace("\n", "")  # apaga os '\n' lidos no final da linha
                 self.cursor.execute('insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
-                linha[0], float(linha[1]), int(linha[2])))
+                    linha[0], float(linha[1]), int(linha[2])))
             else:
                 return
