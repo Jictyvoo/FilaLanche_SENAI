@@ -44,6 +44,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+        wrongInput = True
         while(wrongInput):
             try:
                 os.system("cls || clear")
@@ -59,8 +60,8 @@ class Interface:
 
     def realizarPedido(self, idEstudante):
         for index, value in enumerate(self.controller.getTodosProdutos()):
-            if value.getQuantidade() > 0:
-                print("[" + str(index) + "] - " + value.getNome() + " -- R$" + str(value.getPreco()))
+            if value[3] > 0:
+                print("[" + str(index) + "] - " + value[1] + " -- R$" + str(value[2]))
         print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
         entrada = input("__.> ")
 
@@ -101,7 +102,7 @@ class Interface:
             elif entrada == "3":
                 turma = str(input("Digite a turma: "))
                 sala = str(input("Digite a sala alocada: "))
-                if self.controller.alocarTurmasSalas(turma, sala):
+                if self.controller.alocarTurmasSalas(turma, sala) == 0:
                     print("Turma Alocada com sucesso!")
                 else:
                     print("Nao foi possivel alocar a turma na sala " + sala)

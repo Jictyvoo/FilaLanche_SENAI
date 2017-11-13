@@ -9,5 +9,4 @@ interface = Interface()
 while (interface.mainLoop()):
     os.system("cls")
 
-interface.getController().registrarLucro()
-interface.getController().registrarPedidos()
+print(interface.getController().registrarLucro())
