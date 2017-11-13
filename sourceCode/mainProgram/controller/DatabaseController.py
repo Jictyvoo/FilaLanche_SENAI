@@ -6,14 +6,11 @@ class DatabaseController:
     def __init__(self):
         self.conexao = MySQLdb.connect('localhost', 'root', '')
         self.cursor = self.conexao.cursor()
-        try:
-            self.conexao.select_db('Fila_Lanche_SENAI')
-        except:
-            self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")
-            self.carregarProdutosEmEstoque()
-            self.carregarSalas()
-            self.cursor.close()
-            self.cursor = self.conexao.cursor()
+        self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")
+        self.carregarProdutosEmEstoque()
+        self.carregarSalas()
+        self.cursor.close()
+        self.cursor = self.conexao.cursor()
 
     def getTodosProdutos(self):
         self.cursor.execute('select * from Produto')
@@ -214,5 +211,7 @@ class DatabaseController:
                 linha[2] = linha[2].replace("\n", "")  # apaga os '\n' lidos no final da linha
                 self.cursor.execute('insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
                     linha[0], float(linha[1]), int(linha[2])))
+                print("okay")
             else:
+                print("notokay")
                 return
