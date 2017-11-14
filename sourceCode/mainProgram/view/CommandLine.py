@@ -1,5 +1,5 @@
 import os
-import time
+import datetime
 
 from sourceCode.mainProgram.controller.DatabaseController import DatabaseController
 
@@ -91,7 +91,7 @@ class Interface:
                 idEstudante = self.cadastrarEstudante()
                 self.realizarPedido(idEstudante)
         else:
-            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[3] - Alocar Salas\n[4] - Listar Pedidos\n[] - Sair")
+            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[3] - Alocar Salas\n[4] - Listar Pedidos\n[5] - Cadastrar Sala\n[] - Sair")
             entrada = input("__.> ")
             if entrada == "1":
                 idEstudante = int(input("Digite o id "))
@@ -110,23 +110,36 @@ class Interface:
             elif entrada == "4":
                 lista = self.controller.listarPedidos()
                 print("####### Pedidos realizados #######\n\n")
+<<<<<<< HEAD
                 print("Nome do estudante:", lista[0], "\nID do produto:", lista[1], "\nMatricula: ",lista[2],
                       "\nData e Horario:", lista[3], "\nQuantidade:",lista[4], "\n\n")
+            elif entrada == "5":
+                self.cadastrarsala()
+=======
+                for value in lista:
+                    print("Nome do estudante:", value[0], "\nID do produto:", value[1], "\nMatricula: ",value[2],
+                          "\nData e Horario:", value[3], "\nQuantidade:",value[4], "\n\n")
+>>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b
         return True
 
     def getController(self):
         return self.controller
 
+<<<<<<< HEAD
 
     def cadastrarsala(self):
-        nome = str(input("Digite o nome da sala"))
-        horariomanha = str(input("Digite o horário do intervalo da manhã | Formato - hh:mm:ss"))
-        horariotarde = str(input("Digite o horário do intervalo da tarde: | Formato - hh:mm:ss"))
-        horarionoite= str(input("Digite o horário do intervalo da noite | Formato - hh:mm:ss"))
-        timemanha = time.strptime(horariomanha,"%H:%M:%S")
-        timetarde = time.strptime(horariotarde, "%H:%M:%S")
-        timenoite = time.strptime(horarionoite, "%H:%M:%S")
-        self.controller.cadastrarSala(nome,timemanha,timetarde,timenoite)
-
-
-
+        nome = str(input("Digite o nome da sala\n"))
+        horariomanha = str(input("Digite o horário do intervalo da manhã | Formato - hh:mm:ss\n"))
+        horariotarde = str(input("Digite o horário do intervalo da tarde: | Formato - hh:mm:ss\n"))
+        horarionoite= str(input("Digite o horário do intervalo da noite | Formato - hh:mm:ss\n"))
+        self.controller.cadastrarsalabd(nome,horariomanha,horariotarde,horarionoite)
+=======
+<<<<<<< HEAD
+    def cadastrarProduto(self):
+        nomeProduto = input("Qual o nome do produto?")
+        precoProduto = input("Qual o preço do produto?")
+        qntProduto = input("Qual a quantidade do produto?")
+        self.controller.cadastrarProduto(nomeProduto, precoProduto, qntProduto)
+=======
+>>>>>>> 952e82a7632c3153d6854ab9f42a6c5bbaa6966b
+>>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b

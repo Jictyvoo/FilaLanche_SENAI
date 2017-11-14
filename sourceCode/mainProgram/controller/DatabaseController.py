@@ -198,10 +198,10 @@ class DatabaseController:
         ref_arquivo = open("../../entradas/salas.csv", "r")  # abre o arquivo em modo leitura
         while True:  # um laco eterno de um python sem do while
             linha = ref_arquivo.readline().split(';')  # divide a linha pelos ';'
-            if len(linha) == 2:  # verifica se a linha contem apenas os 2 itens necessarios
+            if len(linha) == 4:  # verifica se a linha contem apenas os 2 itens necessarios
                 linha[1] = linha[1].replace("\n", "")  # apaga o '\n' do final da linha
                 self.cursor.execute(
-                    'insert into Sala_Horario(nome_sala, noite) values("%s", "%s")' % (linha[0], linha[1] + ":00"))
+                    'insert into Sala_Horario(nome_sala, manha, tarde, noite) values("%s", "%s", "%s", "%s")' % (linha[0], linha[1], linha[2], linha[3]))
                 self.conexao.commit()
             else:
                 return
@@ -218,17 +218,13 @@ class DatabaseController:
                 return
 
 
-    def cadastrarsala(self,nome,manha,tarde,noite):
-            self.cursor.execute('insert into sala_horario (nome_sala,noite,manha,tarde) values ("%s","%s","%s","%s")' % (nome,manha,noite,tarde))
-
+    def cadastrarsalabd(self,nome,manha,tarde,noite):
+        self.cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' %(nome,manha,tarde,noite))
+        self.conexao.commit()
 
     def listarPedidos(self):
         self.cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
         lista = []
         for linha in self.cursor.fetchall():
-            lista.append(linha[2])
-            lista.append(linha[5])
-            lista.append(linha[6])
-            lista.append(linha[7])
-            lista.append(linha[8])
+            lista.append((linha[2], linha[5], linha[6], linha[7], linha[8]))
         return lista
