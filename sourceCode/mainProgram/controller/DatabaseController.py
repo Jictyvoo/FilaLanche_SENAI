@@ -198,10 +198,10 @@ class DatabaseController:
         ref_arquivo = open("../../entradas/salas.csv", "r")  # abre o arquivo em modo leitura
         while True:  # um laco eterno de um python sem do while
             linha = ref_arquivo.readline().split(';')  # divide a linha pelos ';'
-            if len(linha) == 2:  # verifica se a linha contem apenas os 2 itens necessarios
+            if len(linha) == 4:  # verifica se a linha contem apenas os 2 itens necessarios
                 linha[1] = linha[1].replace("\n", "")  # apaga o '\n' do final da linha
                 self.cursor.execute(
-                    'insert into Sala_Horario(nome_sala, noite) values("%s", "%s")' % (linha[0], linha[1] + ":00"))
+                    'insert into Sala_Horario(nome_sala, manha, tarde, noite) values("%s", "%s", "%s", "%s")' % (linha[0], linha[1], linha[2], linha[3]))
                 self.conexao.commit()
             else:
                 return

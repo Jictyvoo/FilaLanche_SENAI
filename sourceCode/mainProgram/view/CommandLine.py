@@ -116,3 +116,4 @@ class Interface:
 
     def getController(self):
         return self.controller
+
