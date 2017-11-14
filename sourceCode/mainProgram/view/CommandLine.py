@@ -117,8 +117,11 @@ class Interface:
     def getController(self):
         return self.controller
 
+<<<<<<< HEAD
     def cadastrarProduto(self):
         nomeProduto = input("Qual o nome do produto?")
         precoProduto = input("Qual o preço do produto?")
         qntProduto = input("Qual a quantidade do produto?")
         self.controller.cadastrarProduto(nomeProduto, precoProduto, qntProduto)
+=======
+>>>>>>> 952e82a7632c3153d6854ab9f42a6c5bbaa6966b
