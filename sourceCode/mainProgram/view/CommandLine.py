@@ -111,10 +111,16 @@ class Interface:
                 lista = self.controller.listarPedidos()
                 print("####### Pedidos realizados #######\n\n")
 <<<<<<< HEAD
+<<<<<<< HEAD
                 print("Nome do estudante:", lista[0], "\nID do produto:", lista[1], "\nMatricula: ",lista[2],
                       "\nData e Horario:", lista[3], "\nQuantidade:",lista[4], "\n\n")
             elif entrada == "5":
                 self.cadastrarsala()
+=======
+                for value in lista:
+                    print("Nome do estudante:", value[0], "\nID do produto:", value[1], "\nMatricula: ",value[2],
+                          "\nData e Horario:", value[3], "\nQuantidade:",value[4], "\n\n")
+>>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b
 =======
                 for value in lista:
                     print("Nome do estudante:", value[0], "\nID do produto:", value[1], "\nMatricula: ",value[2],
@@ -126,6 +132,7 @@ class Interface:
         return self.controller
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     def cadastrarsala(self):
         nome = str(input("Digite o nome da sala\n"))
@@ -135,6 +142,8 @@ class Interface:
         self.controller.cadastrarsalabd(nome,horariomanha,horariotarde,horarionoite)
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b
     def cadastrarProduto(self):
         nomeProduto = input("Qual o nome do produto?")
         precoProduto = input("Qual o preço do produto?")
@@ -142,4 +151,7 @@ class Interface:
         self.controller.cadastrarProduto(nomeProduto, precoProduto, qntProduto)
 =======
 >>>>>>> 952e82a7632c3153d6854ab9f42a6c5bbaa6966b
+<<<<<<< HEAD
+>>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b
+=======
 >>>>>>> c51239f49836459eebb4dbf50970744eef6c9f9b
