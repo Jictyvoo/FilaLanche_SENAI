@@ -107,7 +107,6 @@ class Interface:
                 else:
                     print("Nao foi possivel alocar a turma na sala " + sala)
             elif entrada == "4":
-                lista = []
                 lista = self.controller.listarPedidos()
                 print("####### Pedidos realizados #######\n\n")
                 print("Nome do estudante:", lista[0], "\nID do produto:", lista[1], "\nMatricula: ",lista[2],

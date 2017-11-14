@@ -6,11 +6,14 @@ class DatabaseController:
     def __init__(self):
         self.conexao = MySQLdb.connect('localhost', 'root', '')
         self.cursor = self.conexao.cursor()
-        self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")
-        self.carregarProdutosEmEstoque()
-        self.carregarSalas()
-        self.cursor.close()
-        self.cursor = self.conexao.cursor()
+        try:
+            self.conexao.select_db('Fila_Lanche_SENAI')
+        except MySQLdb.DatabaseError:
+            self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")
+            self.carregarProdutosEmEstoque()
+            self.carregarSalas()
+            self.cursor.close()
+            self.cursor = self.conexao.cursor()
 
     def getTodosProdutos(self):
         self.cursor.execute('select * from Produto')
@@ -84,7 +87,6 @@ class DatabaseController:
         minutoNecessario = (int(horarioNecessario[1]) + (int(horarioNecessario[0]) * 60))  # idem linha anterior
 
         pode = minutoNecessario - minutoAtual  # subtrai os minutos para verificar a diferenca de horario
-        print(pode)
         if pode <= 20 and pode >= 10:  # verifica se esta dentro do horario permitido
             return True
         return False
@@ -212,9 +214,7 @@ class DatabaseController:
                 linha[2] = linha[2].replace("\n", "")  # apaga os '\n' lidos no final da linha
                 self.cursor.execute('insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
                     linha[0], float(linha[1]), int(linha[2])))
-                print("okay")
             else:
-                print("notokay")
                 return
 
     def listarPedidos(self):
@@ -226,4 +226,4 @@ class DatabaseController:
             lista.append(linha[6])
             lista.append(linha[7])
             lista.append(linha[8])
-            return lista
+        return lista
