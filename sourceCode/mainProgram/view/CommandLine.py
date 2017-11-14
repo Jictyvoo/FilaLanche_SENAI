@@ -1,4 +1,5 @@
 import os
+import time
 
 from sourceCode.mainProgram.controller.DatabaseController import DatabaseController
 
@@ -115,3 +116,17 @@ class Interface:
 
     def getController(self):
         return self.controller
+
+
+    def cadastrarsala(self):
+        nome = str(input("Digite o nome da sala"))
+        horariomanha = str(input("Digite o horário do intervalo da manhã | Formato - hh:mm:ss"))
+        horariotarde = str(input("Digite o horário do intervalo da tarde: | Formato - hh:mm:ss"))
+        horarionoite= str(input("Digite o horário do intervalo da noite | Formato - hh:mm:ss"))
+        timemanha = time.strptime(horariomanha,"%H:%M:%S")
+        timetarde = time.strptime(horariotarde, "%H:%M:%S")
+        timenoite = time.strptime(horarionoite, "%H:%M:%S")
+        self.controller.cadastrarSala(nome,timemanha,timetarde,timenoite)
+
+
+

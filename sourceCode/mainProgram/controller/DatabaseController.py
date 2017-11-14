@@ -217,6 +217,11 @@ class DatabaseController:
             else:
                 return
 
+
+    def cadastrarsala(self,nome,manha,tarde,noite):
+            self.cursor.execute('insert into sala_horario (nome_sala,noite,manha,tarde) values ("%s","%s","%s","%s")' % (nome,manha,noite,tarde))
+
+
     def listarPedidos(self):
         self.cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
         lista = []
