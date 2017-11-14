@@ -90,7 +90,7 @@ class Interface:
                 idEstudante = self.cadastrarEstudante()
                 self.realizarPedido(idEstudante)
         else:
-            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[3] - Alocar Salas\n[] - Sair")
+            print("[1] - Modificar Estudante\n[2] - Realizar Pedido\n[3] - Alocar Salas\n[4] - Listar Pedidos\n[] - Sair")
             entrada = input("__.> ")
             if entrada == "1":
                 idEstudante = int(input("Digite o id "))
@@ -106,6 +106,12 @@ class Interface:
                     print("Turma Alocada com sucesso!")
                 else:
                     print("Nao foi possivel alocar a turma na sala " + sala)
+            elif entrada == "4":
+                lista = []
+                lista = self.controller.listarPedidos()
+                print("####### Pedidos realizados #######\n\n")
+                print("Nome do estudante:", lista[0], "\nID do produto:", lista[1], "\nMatricula: ",lista[2],
+                      "\nData e Horario:", lista[3], "\nQuantidade:",lista[4], "\n\n")
         return True
 
     def getController(self):

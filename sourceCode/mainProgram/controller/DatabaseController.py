@@ -216,3 +216,14 @@ class DatabaseController:
             else:
                 print("notokay")
                 return
+
+    def listarPedidos(self):
+        self.cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
+        lista = []
+        for linha in self.cursor.fetchall():
+            lista.append(linha[2])
+            lista.append(linha[5])
+            lista.append(linha[6])
+            lista.append(linha[7])
+            lista.append(linha[8])
+            return lista
