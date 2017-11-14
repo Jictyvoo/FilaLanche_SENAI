@@ -109,8 +109,9 @@ class Interface:
             elif entrada == "4":
                 lista = self.controller.listarPedidos()
                 print("####### Pedidos realizados #######\n\n")
-                print("Nome do estudante:", lista[0], "\nID do produto:", lista[1], "\nMatricula: ",lista[2],
-                      "\nData e Horario:", lista[3], "\nQuantidade:",lista[4], "\n\n")
+                for value in lista:
+                    print("Nome do estudante:", value[0], "\nID do produto:", value[1], "\nMatricula: ",value[2],
+                          "\nData e Horario:", value[3], "\nQuantidade:",value[4], "\n\n")
         return True
 
     def getController(self):
