@@ -16,7 +16,7 @@ class DatabaseController:
             self.cursor = self.conexao.cursor()
 
     def getTodosProdutos(self):
-        self.cursor.execute('select * from Produto')
+        self.cursor.execute('select * from Produto where quantidade > 0')
         return self.cursor.fetchall()
 
     def cadastrarEstudante(self, nome, id, turma, data_nascimento):  # metodo para instanciar um novo estudante
@@ -30,12 +30,9 @@ class DatabaseController:
         self.cursor.execute('select * from Estudante where matricula = "%d"' % idEstudante)
         return self.cursor.fetchone()
 
-    def cadastrarSala(self, nome_sala, ocupado, noite, manha,
-                      tarde):  # metodo para instanciar um novo estudante
-        self.cursor.execute(
-            'insert into Sala_Horario(nome_sala, ocupado, noite, manha, tarde) values("%s", "%s", "%s", "%s", "%s")' % (
-                nome_sala,
-                ocupado, noite, manha, tarde))
+    def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
+        self.cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
+            nome_sala, manha, tarde, noite))
         self.conexao.commit()
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controller
@@ -44,7 +41,7 @@ class DatabaseController:
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.cursor.execute(
-            'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % nome, preco, quantidade)
+            'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (nome, float(preco), int(quantidade)))
         self.conexao.commit()
 
     def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controller
@@ -152,6 +149,11 @@ class DatabaseController:
         except:
             return -1
 
+    def analisamax(self):
+        self.cursor.execute('select max(id_produto) from produto where quantidade >0')
+        max = self.cursor.fetchone()
+        return int(max[0])
+
     def analisaLinhaPedidos(self, entrada):  # metodo que analisa a linha de pedidos feitos
         if entrada == "":  # verifica se a entrada eh vazia, caso o seja, retorna lista vazia
             return []
@@ -161,7 +163,7 @@ class DatabaseController:
             divide = value.split("*")
             # pedido.append(divide)
             if divide[0] != '':
-                if int(divide[0]) < len(self.getTodosProdutos()):  # veirifica se o id esta dentro do padrao:
+                if int(divide[0]) < self.analisamax():  # veirifica se o id esta dentro do padrao:
                     produtoAdicionado = self.getProduto(int(divide[0]))
                     if produtoAdicionado[3] > 0:
                         if len(value.split("*")) > 1:
@@ -201,7 +203,8 @@ class DatabaseController:
             if len(linha) == 4:  # verifica se a linha contem apenas os 2 itens necessarios
                 linha[1] = linha[1].replace("\n", "")  # apaga o '\n' do final da linha
                 self.cursor.execute(
-                    'insert into Sala_Horario(nome_sala, manha, tarde, noite) values("%s", "%s", "%s", "%s")' % (linha[0], linha[1], linha[2], linha[3]))
+                    'insert into Sala_Horario(nome_sala, manha, tarde, noite) values("%s", "%s", "%s", "%s")' % (
+                        linha[0], linha[1], linha[2], linha[3]))
                 self.conexao.commit()
             else:
                 return
@@ -216,11 +219,6 @@ class DatabaseController:
                     linha[0], float(linha[1]), int(linha[2])))
             else:
                 return
-
-
-    def cadastrarsalabd(self,nome,manha,tarde,noite):
-        self.cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' %(nome,manha,tarde,noite))
-        self.conexao.commit()
 
     def listarPedidos(self):
         self.cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
