@@ -16,6 +16,10 @@ class DatabaseController:
             self.cursor = self.conexao.cursor()
 
     def getTodosProdutos(self):
+        self.cursor.execute('select * from Produto')
+        return self.cursor.fetchall()
+
+    def getProdutos(self):
         self.cursor.execute('select * from Produto where quantidade > 0')
         return self.cursor.fetchall()
 
@@ -41,7 +45,8 @@ class DatabaseController:
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.cursor.execute(
-            'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (nome, float(preco), int(quantidade)))
+            'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
+            nome, float(preco), int(quantidade)))
         self.conexao.commit()
 
     def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controller

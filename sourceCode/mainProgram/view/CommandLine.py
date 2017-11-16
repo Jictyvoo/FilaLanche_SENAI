@@ -59,7 +59,7 @@ class Interface:
         return idEstudante
 
     def realizarPedido(self, idEstudante):
-        for index, value in enumerate(self.controller.getTodosProdutos()):
+        for index, value in enumerate(self.controller.getProdutos()):
             if value[3] > 0:
                 print("[" + str(value[0]) + "] - " + value[1] + " -- R$" + str(value[2]))
         print("[] - Sair\nOBS: INSIRA OS PRODUTOS QUE DESEJA COMPRAR DA SEGUINTE FORMA: id*qtd-id*qtd")
@@ -114,7 +114,7 @@ class Interface:
                     print("Nome do estudante:", value[0], "\nID do produto:", value[1], "\nMatricula: ", value[2],
                           "\nData e Horario:", value[3], "\nQuantidade:", value[4], "\n\n")
             elif entrada == "5":
-                self.cadastrarsala()
+                self.cadastrarSala()
             elif entrada == "6":
                 self.cadastrarProduto()
         return True
@@ -122,7 +122,7 @@ class Interface:
     def getController(self):
         return self.controller
 
-    def cadastrarsala(self):
+    def cadastrarSala(self):
         nome = str(input("Digite o nome da sala\n"))
         horariomanha = str(input("Digite o horário do intervalo da manhã | Formato - hh:mm:ss\n"))
         horariotarde = str(input("Digite o horário do intervalo da tarde: | Formato - hh:mm:ss\n"))
@@ -134,3 +134,14 @@ class Interface:
         precoProduto = input("Qual o preço do produto? ")
         qntProduto = input("Qual a quantidade do produto? ")
         self.controller.cadastrarProduto(nomeProduto, precoProduto, qntProduto)
+
+    def apresentarLucro(self):
+        lucros = self.controller.registrarLucro()
+        listaProdutos = self.controller.getTodosProdutos()
+        for index, value in enumerate(listaProdutos):
+            try:
+                print(value[1] + ": " + str(lucros[str(index + 1)]))
+            except KeyError:
+                print(value[1] + ": SEM COMPRA")
+
+        print("\nTOTAL: " + str(lucros['total']))

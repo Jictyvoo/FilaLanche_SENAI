@@ -9,4 +9,4 @@ interface = Interface()
 while (interface.mainLoop()):
     os.system("cls")
 
-print(interface.getController().registrarLucro())
+interface.apresentarLucro()
