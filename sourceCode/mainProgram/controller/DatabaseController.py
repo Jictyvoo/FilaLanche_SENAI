@@ -4,33 +4,33 @@ from datetime import datetime
 
 class DatabaseController:
     def __init__(self):
-        self.conexao = MySQLdb.connect('localhost', 'root', '')
-        self.cursor = self.conexao.cursor()
-        try:
+        self.conexao = MySQLdb.connect('localhost', 'root', '')  # se conecta com o banco de dados
+        self.cursor = self.conexao.cursor()  # cria um cursor para o banco de dados
+        try:  # tenta acessar o banco de dados
             self.conexao.select_db('Fila_Lanche_SENAI')
-        except MySQLdb.DatabaseError:
-            self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")
-            self.carregarProdutosEmEstoque()
-            self.carregarSalas()
-            self.cursor.close()
-            self.cursor = self.conexao.cursor()
+        except MySQLdb.DatabaseError:  # caso nao consiga, significa que ele nao existe
+            self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")  # executa o sql de criacao do banco
+            self.carregarProdutosEmEstoque()  # le o arquivo csv e carrega no banco
+            self.carregarSalas()  # le o arquivo csv e carrega no banco
+            self.cursor.close()  # fecha o cursor para evitar erro
+            self.cursor = self.conexao.cursor()  # cria um novo cursor
 
-    def getTodosProdutos(self):
+    def getTodosProdutos(self):  # retorna todos os produtos existentes no banco
         self.cursor.execute('select * from Produto')
         return self.cursor.fetchall()
 
-    def getProdutos(self):
+    def getProdutos(self):  # retorna todos os produtos do banco que possuam disponibilidade de venda
         self.cursor.execute('select * from Produto where quantidade > 0')
         return self.cursor.fetchall()
 
     def cadastrarEstudante(self, nome, id, turma, data_nascimento):  # metodo para instanciar um novo estudante
-        dia, mes, ano = data_nascimento.split("-")
+        dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
         self.cursor.execute(
             'insert into Estudante(matricula,nome,turma,data_nascimento) values("%d", "%s","%s","%s")' % (
-                id, nome, turma, ano + "-" + mes + "-" + dia))
+                id, nome, turma, ano + "-" + mes + "-" + dia))  # insere o estudante no banco de dados
         self.conexao.commit()
 
-    def getEstudante(self, idEstudante):
+    def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         self.cursor.execute('select * from Estudante where matricula = "%d"' % idEstudante)
         return self.cursor.fetchone()
 
@@ -46,7 +46,7 @@ class DatabaseController:
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.cursor.execute(
             'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
-            nome, float(preco), int(quantidade)))
+                nome, float(preco), int(quantidade)))  # insere o produto no banco de dados
         self.conexao.commit()
 
     def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controller
@@ -71,12 +71,14 @@ class DatabaseController:
         self.conexao.commit()
 
     def vendeProduto(self, listaDeProdutos):  # metodo para remover itens existentes
-        for (index, value) in enumerate(listaDeProdutos):
+        for (index, value) in enumerate(listaDeProdutos):  # procura o produto na lista de pedidos
             informacao = value.split(";")
-            self.cursor.execute('select quantidade from Produto where id_produto = "%d"' % int(informacao[0]))
+            self.cursor.execute('select quantidade from Produto where id_produto = "%d"' % int(
+                informacao[0]))  # busca o produto que existe na lista de pedido e pega a quantidade disponivel de itens
             quantidadeAnterior = self.cursor.fetchone()[0]
             self.cursor.execute('update Produto set quantidade = "%d" where id_produto = "%d"' %
-                                (int(quantidadeAnterior) - int(informacao[1]), int(informacao[0])))
+                                (int(quantidadeAnterior) - int(informacao[1]),
+                                 int(informacao[0])))  # retira a quantidade comprada de produtos do banco de dados
             self.conexao.commit()
 
     def podeComprar(self, horarioSala):  # metodo que verifica o horario para saber se pode ou nao fazer o pedido
@@ -99,17 +101,18 @@ class DatabaseController:
 
             horarioAtual = datetime.now().hour
             turno = 3
-            if horarioAtual < 12 and horarioAtual > 6:
+            if horarioAtual < 12 and horarioAtual > 6:  # verifica se esta no turno da manha
                 turno = 4
-            elif horarioAtual < 18 and horarioAtual > 12:
+            elif horarioAtual < 18 and horarioAtual > 12:  # verifica se esta no turno da tarde
                 turno = 5
-            else:
+            else:  # considera que esta no turno da noite
                 turno = 3
 
             turmaEncontrada = foundedStudent[4]  # pega a turma do estudante
-            self.cursor.execute('select * from Sala_Horario where ocupado = "%s"' % turmaEncontrada)
+            self.cursor.execute(
+                'select * from Sala_Horario where ocupado = "%s"' % turmaEncontrada)  # busca a sala em que a turma esta alocada
             horarioTurno = self.cursor.fetchone()
-            if not horarioTurno:
+            if not horarioTurno:  # se nao existe a turma alocada em sala
                 return -1  # retorna o codigo referente ao fato da turma nao estar em sala alguma
             horarioSala = str(horarioTurno[turno])
 
@@ -117,8 +120,8 @@ class DatabaseController:
                 for index, value in enumerate(listaProdutos):
                     produto = value.split(";")
                     self.cursor.execute(
-                        'insert into Pedido values("%s", "%d", curdate(), "%s")' % (produto[0], idEstudante,
-                                                                                    produto[1]))
+                        'insert into Pedido values("%s", "%d", now(), "%s")' % (produto[0], idEstudante,
+                                                                                produto[1]))
                     self.conexao.commit()
                 self.vendeProduto(listaProdutos)  # utiliza o metodo de venda para remover os produtos disponiveis
                 return 1  # retorna 1 se houver sucesso
@@ -129,33 +132,42 @@ class DatabaseController:
 
     def registrarLucro(self):
         self.cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')
-        pedidos = self.cursor.fetchall()
-        lucroTotal = 0
-        dicionarioLucrosPorProduto = {}
-        for linhas in pedidos:
+        pedidos = self.cursor.fetchall()  # pega todos os pedidos da data atual
+        lucroTotal = 0  # seta um lucro total do dia
+        dicionarioLucrosPorProduto = {}  # cria um dicionario para armazenar os lucros
+        for linhas in pedidos:  # abre todas as linhas de pedidos
             self.cursor.execute('select preco from Produto where id_produto = "%d" ' % linhas[0])
-            preco = self.cursor.fetchone()
-            lucro = float(preco[0]) * int(linhas[1])
-            dicionarioLucrosPorProduto[str(linhas[0])] = lucro
-            lucroTotal += lucro
+            preco = self.cursor.fetchone()  # pega o preco dos produtos que realizaram pedido
+            lucro = float(preco[0]) * int(
+                linhas[1])  # pega o valor do produto e multiplica pela quantidade de produtos comprados
+            jaArmazenado = False
+            for chaves in dicionarioLucrosPorProduto.keys():  # verifica se ja armazenou o lucro daquele item
+                if (chaves == str(linhas[0])):
+                    jaArmazenado = True
+                    break
+            if jaArmazenado:
+                dicionarioLucrosPorProduto[str(linhas[0])] += lucro  # adiciona o lucro no dicionario
+            else:
+                dicionarioLucrosPorProduto[str(linhas[0])] = lucro  # adiciona o lucro no dicionario
+            lucroTotal += lucro  # adiciona o lucro do produto ao lucro total
 
-        dicionarioLucrosPorProduto['total'] = lucroTotal
+        dicionarioLucrosPorProduto['total'] = lucroTotal  # adiciona o lucro total no dicionario
         return dicionarioLucrosPorProduto
 
     def alocarTurmasSalas(self, turma, nomeSala):  # metodo para alocar as turmas a uma sala
         try:
             self.cursor.execute('select id_sala from Sala_Horario where nome_sala = "%s"' % nomeSala)
-            id_sala = self.cursor.fetchone()[0]
+            id_sala = self.cursor.fetchone()[0]  # retorna o id da sala que possui aquele nome
             self.cursor.execute('update Estudante set id_sala = "%s" where turma = "%s"' % (id_sala, turma))
-            self.conexao.commit()
+            self.conexao.commit()  # adiciona a sala na tabela do estudante
             self.cursor.execute('update Sala_Horario set ocupado = "%s" where id_sala = "%s"' % (turma, id_sala))
-            self.conexao.commit()
+            self.conexao.commit()  # adiciona na sala que ela esta ocupada por alguma turma
             return 0
         except:
             return -1
 
-    def analisamax(self):
-        self.cursor.execute('select max(id_produto) from produto where quantidade >0')
+    def analisaMaxIdProduto(self):  # verifica qual o id maximo do produto disponivel para compra
+        self.cursor.execute('select max(id_produto) from produto where quantidade > 0')
         max = self.cursor.fetchone()
         return int(max[0])
 
@@ -168,7 +180,7 @@ class DatabaseController:
             divide = value.split("*")
             # pedido.append(divide)
             if divide[0] != '':
-                if int(divide[0]) < self.analisamax():  # veirifica se o id esta dentro do padrao:
+                if int(divide[0]) <= self.analisaMaxIdProduto():  # veirifica se o id esta dentro do padrao:
                     produtoAdicionado = self.getProduto(int(divide[0]))
                     if produtoAdicionado[3] > 0:
                         if len(value.split("*")) > 1:
@@ -177,26 +189,26 @@ class DatabaseController:
                             pedido.append(value + ";1")  # caso so tenha um item, adiciona apenas 1 item
         return pedido  # retorna o pedido realizado
 
-    def carregarSQL(self, arquivo_sql):
+    def carregarSQL(self, arquivo_sql):  # carrega o arquivo sql e cortar os camandos em itens de uma lista
         ref_arquivo = open(arquivo_sql, "r")
         linhasCriacao = []
         for linha in ref_arquivo:  # um laco eterno de um python sem do while
             linha = linha.replace("\n", "")  # apaga o '\n' do final da linha
             linhasCriacao.append(linha)
 
-        comandos = []
-        tempComando = ""
-        for index, value in enumerate(linhasCriacao):
-            tempComando = tempComando + value + " "
+        comandos = []  # cria a lista que ira armazenar os comandos
+        tempComando = ""  # string temporaria para armazenar o comando
+        for index, value in enumerate(linhasCriacao):  # varre todas as linhas
+            tempComando = tempComando + value + " "  # vai adicionando o conteudo de cada uma das linhas na string temporaria
             tamanho = len(value) - 1
-            if tamanho > 0:
-                if value[tamanho] == ";":
+            if tamanho > 0:  # verifica se naquela linha existe algum comando
+                if value[tamanho] == ";":  # se possuir um ';' no final da linha, adiciona o comando na lista
                     comandos.append(tempComando)
                     tempComando = ""
 
         return comandos
 
-    def executarSQL(self, arquivo_sql):
+    def executarSQL(self, arquivo_sql):  # pega a lista de comandos sql e executa
         comandos = self.carregarSQL(arquivo_sql)
         for i, value in enumerate(comandos):
             self.cursor.execute(value)
@@ -225,9 +237,9 @@ class DatabaseController:
             else:
                 return
 
-    def listarPedidos(self):
+    def listarPedidos(self):  # metodo para listar todos os pedidos do banco de dados
         self.cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
         lista = []
-        for linha in self.cursor.fetchall():
+        for linha in self.cursor.fetchall():  # adiciona varias tuplas na lista de pedidos
             lista.append((linha[2], linha[5], linha[6], linha[7], linha[8]))
         return lista
