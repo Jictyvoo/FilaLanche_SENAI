@@ -1,6 +1,6 @@
 import os
 
-from sourceCode.mainProgram.controller.DatabaseController import DatabaseController
+from sourceCode.mainProgram.controllers.DatabaseController import DatabaseController
 
 
 class Interface:

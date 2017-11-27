@@ -20,14 +20,33 @@ tarde time,
 PRIMARY KEY(id_sala)
 );
 
-CREATE TABLE if not exists Estudante (
-matricula int not null auto_increment,
-id_sala int,
+CREATE TABLE if not exists Pessoa (
+id_pessoa int not null auto_increment,
+cpf int(11),
+rg int(10),
 nome varchar(70) not null,
 data_nascimento date not null,
+PRIMARY KEY(id_pessoa)
+);
+
+CREATE TABLE if not exists Estudante (
+id_estudante int not null auto_increment,
+id_pessoa int not null,
+id_sala int,
+matricula int,
 turma varchar(30) not null,
-PRIMARY KEY(matricula),
+PRIMARY KEY(id_estudante),
+FOREIGN KEY(id_pessoa) REFERENCES Pessoa(id_pessoa),
 FOREIGN KEY(id_sala) REFERENCES Sala_Horario(id_sala)
+);
+
+CREATE TABLE if not exists Administrador (
+id_administrador int not null auto_increment,
+id_pessoa int not null,
+cargo varchar(40),
+matricula int,
+PRIMARY KEY(id_administrador),
+FOREIGN KEY(id_pessoa) REFERENCES Pessoa(id_pessoa)
 );
 
 CREATE TABLE if not exists Pedido (

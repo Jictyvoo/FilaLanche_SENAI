@@ -2,7 +2,7 @@
 
 import os
 
-from sourceCode.mainProgram.view.CommandLine import Interface
+from sourceCode.mainProgram.views.CommandLine import Interface
 
 interface = Interface()
 

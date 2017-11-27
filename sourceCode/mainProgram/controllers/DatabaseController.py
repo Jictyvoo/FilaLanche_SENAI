@@ -39,7 +39,7 @@ class DatabaseController:
             nome_sala, manha, tarde, noite))
         self.conexao.commit()
 
-    def getSala(self, idSala):  # metodo que busca as salas nas listas do controller
+    def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.cursor.execute('select * from Sala_Horario where id_sala = "%d" and ocupado = NULL' % idSala)
         return self.cursor.fetchone()
 
@@ -49,7 +49,7 @@ class DatabaseController:
                 nome, float(preco), int(quantidade)))  # insere o produto no banco de dados
         self.conexao.commit()
 
-    def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controller
+    def getProduto(self, id_produto):  # metodo que busca os itens nas listas do controllers
         self.cursor.execute('select * from Produto where id_produto = "%d"' % id_produto)
         return self.cursor.fetchone()
 
