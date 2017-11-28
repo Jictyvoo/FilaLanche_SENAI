@@ -78,6 +78,11 @@ class Interface:
                 print("Pedido Realizado com sucesso!")
 
     def mainLoop(self):
+        print("Seja bem vindo ao sistema de lanches do senai")
+        senha = int(input("Digite a sua senha para continuar!"))
+
+
+
         idEstudante = self.inserirIdEstudante()
         if idEstudante == "":
             return False
