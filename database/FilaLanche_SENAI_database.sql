@@ -51,9 +51,9 @@ FOREIGN KEY(id_pessoa) REFERENCES Pessoa(id_pessoa)
 
 CREATE TABLE if not exists Pedido (
 id_produto int not null,
-matricula int not null,
+id_estudante int not null,
 data_horario datetime not null,
 quantidade int not null,
 FOREIGN KEY(id_produto) REFERENCES Produto(id_produto),
-FOREIGN KEY(matricula) REFERENCES Estudante(matricula)
+FOREIGN KEY(id_estudante) REFERENCES Estudante(id_estudante)
 );
