@@ -3,7 +3,7 @@ class Administrador(Pessoa):
 
 
     def __init__(self,id,conexao):
-        
+
     def __init__(self,conexao,id_pessoa,cpf,rg,nome,data_nascimento,id_admin,cargo,matricula):
         super.__init__(conexao,id_pessoa,cpf,rg,nome,data_nascimento)
         self.__id_admin= id_admin
