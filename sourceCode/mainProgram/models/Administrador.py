@@ -1,21 +1,9 @@
-from sourceCode.mainProgram.models.Pessoa import Pessoa
-class Administrador(Pessoa):
+from sourceCode.mainProgram.models.DatabaseManipulator import DatabaseManipulator
 
 
-<<<<<<< HEAD
-    def __init__(self,id,conexao):
-
-    def __init__(self,conexao,id_pessoa,cpf,rg,nome,data_nascimento,id_admin,cargo,matricula):
-        super.__init__(conexao,id_pessoa,cpf,rg,nome,data_nascimento)
-        self.__id_admin= id_admin
-        self.__cargo = cargo
-        self.__matricula = matricula
-        self.__cursor = self.getConexao().cursor()
-=======
 class Administrador(DatabaseManipulator):
     def __init__(self, conexao):
         super(Administrador, self).__init__(conexao)
->>>>>>> 0c25160bd81481b171d0362134a45dce9f7761f9
 
     def cadastrarEstudante(self, nome, id, id_turma, data_nascimento):  # metodo para instanciar um novo estudante
         dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
