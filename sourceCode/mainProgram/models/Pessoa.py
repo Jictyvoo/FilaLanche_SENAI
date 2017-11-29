@@ -1,63 +1,51 @@
-class Pessoa:
-    def __init__(self, conexao, cpf, rg, nome, data_nascimento):
-        self.__cpf = cpf
-        self.__rg = rg
-        self.__nome = nome
-        self.__data_nascimento = data_nascimento
-        self.__conexao = conexao
-        self.__cursor = self.__conexao.cursor()
-        self.__cursor.execute('replace Pessoa(cpf, rg, nome, data_nascimento) values ("%d", "%d", "%s", "%s")' % (
-        cpf, rg, nome, data_nascimento))
-        self.__cursor.execute(
-            'select id_pessoa from Pessoa where cpf = "%d" and rg = "%d" and nome = "%s" and data_nascimento = "%s"' % (
-            cpf, rg, nome, data_nascimento))
-        self.__id_pessoa = self.__cursor.fetchone[0]
+from sourceCode.mainProgram.models.DatabaseManipulator import DatabaseManipulator
 
-    def __init__(self, conexao, id_pessoa):
-        self.__conexao = conexao
-        self.__cursor = self.__conexao.cursor()
-        self.__cursor.execute('select * from Pessoa where id_pessoa = "%d"' % id_pessoa)
-        atributos = self.__cursor.fetchone()
-        self.__id_pessoa = atributos[0]
-        self.__cpf = atributos[1]
-        self.__rg = atributos[2]
-        self.__nome = atributos[3]
-        self.__data_nascimento = atributos[4]
 
-    def getId_pessoa(self):
-        return self.__id_pessoa
+class Pessoa(DatabaseManipulator):
+    def __init__(self, conexao):
+        super(Pessoa, self).__init__(conexao)
 
-    def getCpf(self):
-        return self.__cpf
+    def getCpf(self, id_pessoa):
+        self.__cursor.execute('select cpf from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        cpf = self.__cursor.fetchone()
+        return cpf[0]
 
-    def setCpf(self, value):
-        self.__cursor.execute('update Pessoa set cpf = "%d"' % value)
+    def setCpf(self, id_pessoa, cpf):
+        self.__cursor.execute('update Pessoa set cpf = "%d" where id_pessoa = "%d"' % cpf, id_pessoa)
         self.__conexao.commit()
-        self.__cpf = value
 
-    def getRg(self):
-        return self.__rg
+    def getRg(self, id_pessoa):
+        self.__cursor.execute('select rg from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        rg = self.__cursor.fetchone()
+        return rg[0]
 
-    def setRg(self, value):
-        self.__cursor.execute('update Pessoa set rg = "%d"' % value)
+    def setRg(self, id_pessoa, rg):
+        self.__cursor.execute('update Pessoa set rg = "%d" where id_pessoa = "%d"' % rg, id_pessoa)
         self.__conexao.commit()
-        self.__rg = value
 
-    def getNome(self):
-        return self.__nome
+    def getNome(self, id_pessoa):
+        self.__cursor.execute('select nome from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        nome = self.__cursor.fetchone()
+        return nome[0]
 
-    def setNome(self, value):
-        self.__cursor.execute('update Pessoa set nome = "%s"' % value)
+    def setNome(self, id_pessoa, nome):
+        self.__cursor.execute('update Pessoa set nome = "%s" where id_pessoa = "%d"' % nome, id_pessoa)
         self.__conexao.commit()
-        self.__nome = value
 
-    def getData_nascimento(self):
-        return self.__data_nascimento
+    def getDataNascimento(self, id_pessoa):
+        self.__cursor.execute('select data_nascimento from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        data_nascimento = self.__cursor.fetchone()
+        return data_nascimento[0]
 
-    def setData_nascimento(self, value):
-        self.__cursor.execute('update Pessoa set data_nascimento = "%s"' % value)
+    def setDataNascimento(self, id_pessoa, data_nascimento):
+        self.__cursor.execute('update Pessoa set data_nascimento = "%s" where id_pessoa = "%d"' % data_nascimento,
+                              id_pessoa)
         self.__conexao.commit()
-        self.__data_nascimento = value
+
+    def getPassword(self, id_pessoa):
+        self.__cursor.execute('select password from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        password = self.__cursor.fetchone()
+        return password[0]
 
     def getConexao(self):
         return self.__conexao
