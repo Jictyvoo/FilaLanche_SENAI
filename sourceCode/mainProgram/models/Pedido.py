@@ -6,8 +6,8 @@ class Pedido(DatabaseManipulator):
     def __init__(self, conexao):
         super(Pedido, self).__init__(conexao)
 
-    def novoPedido(self, idEstudante, listaProdutos):  # funcao que realiza um novo pedido
-        foundedStudent = self.getEstudante(idEstudante)  # busca o estudante no banco de dados
+    def novoPedido(self, idEstudante, listaProdutos, getEstudante, podeComprar):  # funcao que realiza um novo pedido
+        foundedStudent = getEstudante(idEstudante)  # busca o estudante no banco de dados
         if len(foundedStudent) > 0:  # se encontrar algum estudante
 
             horarioAtual = datetime.now().hour
@@ -27,21 +27,21 @@ class Pedido(DatabaseManipulator):
                 return -1  # retorna o codigo referente ao fato da turma nao estar em sala alguma
             horarioSala = str(horarioTurno[turno])
 
-            if self.podeComprar(horarioSala):  # verifica se o horario permite compra de item
+            if podeComprar(horarioSala):  # verifica se o horario permite compra de item
                 for index, value in enumerate(listaProdutos):
                     produto = value.split(";")
                     self.__cursor.execute(
-                        'insert into Pedido values("%s", "%d", now(), "%s")' % (produto[0], idEstudante,
-                                                                                produto[1]))
-                    self.conexao.commit()
-                self.vendeProduto(listaProdutos)  # utiliza o metodo de venda para remover os produtos disponiveis
+                        'call processar_pedido("%s", "%d", now(), "%s")' % (produto[0], idEstudante,
+                                                                            produto[1]))
+                    self.__conexao.commit()
                 return 1  # retorna 1 se houver sucesso
             else:
                 return -2  # retorna -2 se nao estiver no horario de compra da sala
         else:  # caso encontre uma excessao de acesso ao dicionario atraves de uma chave inexistente
             return 0
 
-    def analisaLinhaPedidos(self, entrada):  # metodo que analisa a linha de pedidos feitos
+    def analisaLinhaPedidos(self, entrada, analisaMaxIdProduto,
+                            getProduto):  # metodo que analisa a linha de pedidos feitos
         if entrada == "":  # verifica se a entrada eh vazia, caso o seja, retorna lista vazia
             return []
         analisa = str(entrada).split("-")  # divide a entrada para separar item de cada pedido
@@ -50,8 +50,8 @@ class Pedido(DatabaseManipulator):
             divide = value.split("*")
             # pedido.append(divide)
             if divide[0] != '':
-                if int(divide[0]) <= self.analisaMaxIdProduto():  # veirifica se o id esta dentro do padrao:
-                    produtoAdicionado = self.getProduto(int(divide[0]))
+                if int(divide[0]) <= analisaMaxIdProduto():  # veirifica se o id esta dentro do padrao:
+                    produtoAdicionado = getProduto(int(divide[0]))
                     if produtoAdicionado[3] > 0:
                         if len(value.split("*")) > 1:
                             pedido.append(value.replace("*", ";"))  # caso so tenha um item, adiciona apenas 1 item

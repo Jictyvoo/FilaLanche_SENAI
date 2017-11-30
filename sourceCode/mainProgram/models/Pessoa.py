@@ -5,6 +5,10 @@ class Pessoa(DatabaseManipulator):
     def __init__(self, conexao):
         super(Pessoa, self).__init__(conexao)
 
+    def getPessoa(self, id_pessoa):
+        self.__cursor.execute('select * from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        return self.__cursor.fetchone()
+
     def getCpf(self, id_pessoa):
         self.__cursor.execute('select cpf from Pessoa where id_pessoa = "%d"' % id_pessoa)
         cpf = self.__cursor.fetchone()
@@ -46,6 +50,3 @@ class Pessoa(DatabaseManipulator):
         self.__cursor.execute('select password from Pessoa where id_pessoa = "%d"' % id_pessoa)
         password = self.__cursor.fetchone()
         return password[0]
-
-    def getConexao(self):
-        return self.__conexao
