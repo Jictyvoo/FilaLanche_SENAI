@@ -1,5 +1,6 @@
 import MySQLdb
 from datetime import datetime
+from sourceCode.mainProgram.models.Pessoa import Pessoa
 
 
 class DatabaseController:
@@ -14,6 +15,27 @@ class DatabaseController:
             self.carregarSalas()  # le o arquivo csv e carrega no banco
             self.cursor.close()  # fecha o cursor para evitar erro
             self.cursor = self.conexao.cursor()  # cria um novo cursor
+
+    def getPerson(self):
+        return Pessoa(self.conexao)
+
+    def getid(self,cpf,senha):
+        self.cursor.execute('select id_pessoa from Estudante where cpf = %d && senha =%s' %(cpf,senha))
+        return self.cursor.fetchone()[0]
+
+    def getTipo(self,id_pessoa):
+        self.cursor.execute('select id_pessoa from Estudante')
+        ids = self.cursor.fetchall()
+        for i in ids:
+            if int(i) == id_pessoa:
+                return 0
+        self.cursor.execute('select id_pessoa from Administrador')
+        ids = self.cursor.fecthall()
+        for i in ids:
+            if int(i) == id_pessoa:
+                return 1
+        return 2
+
 
     def getTodosProdutos(self):  # retorna todos os produtos existentes no banco
         self.cursor.execute('select * from Produto')

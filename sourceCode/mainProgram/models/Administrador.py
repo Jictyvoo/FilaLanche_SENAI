@@ -1,9 +1,18 @@
 from sourceCode.mainProgram.models.DatabaseManipulator import DatabaseManipulator
 
-
 class Administrador(DatabaseManipulator):
     def __init__(self, conexao):
         super(Administrador, self).__init__(conexao)
+
+    def cadastrarPessoa(self,nome,cpf,rg,data_nascimento,senha):
+        self.__cursor.execute('insert into Pessoa(nome,cpf,rg,data_nascimento,password) values ("%s","%d","%d","%s","%s")' %(nome,cpf,rg,data_nascimento,senha))
+        self.__cursor.execute('select id_pessoa from Pessoa where cpf = %d' %cpf)
+        self.__conexao.commit()
+        return int(self.__cursor.fetchone[0])
+
+    def cadastrarAdministrador(self,id,cargo,matricula):
+        self.__cursor.execute('insert into Administrador(id_pessoa,cargo,matricula) values ("%d","%s","%d")' %(id,cargo,matricula))
+        self.__conexao.commit()
 
     def cadastrarEstudante(self, nome, id, id_turma, data_nascimento):  # metodo para instanciar um novo estudante
         dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
@@ -14,10 +23,15 @@ class Administrador(DatabaseManipulator):
             (id, nome, turma, ano + "-" + mes + "-" + dia))  # insere o estudante no banco de dados
         self.__conexao.commit()
 
+
     def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
         self.__cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
             nome_sala, manha, tarde, noite))
         self.__conexao.commit()
+
+    def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
+        self.cursor.execute('select * from Sala_Horario where id_sala = "%d" and ocupado = NULL' % idSala)
+        return self.cursor.fetchone()
 
     def alocarTurmasSalas(self, turma, nomeSala):  # metodo para alocar as turmas a uma sala
         try:

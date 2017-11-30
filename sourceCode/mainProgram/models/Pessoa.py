@@ -4,6 +4,11 @@ from sourceCode.mainProgram.models.DatabaseManipulator import DatabaseManipulato
 class Pessoa(DatabaseManipulator):
     def __init__(self, conexao):
         super(Pessoa, self).__init__(conexao)
+        self.__cursor = conexao.cursor()
+
+    def getCpfs(self):
+        self.__cursor.execute('select cpf from Pessoa')
+        return self.__cursor.fetchall()
 
     def getCpf(self, id_pessoa):
         self.__cursor.execute('select cpf from Pessoa where id_pessoa = "%d"' % id_pessoa)
@@ -46,6 +51,11 @@ class Pessoa(DatabaseManipulator):
         self.__cursor.execute('select password from Pessoa where id_pessoa = "%d"' % id_pessoa)
         password = self.__cursor.fetchone()
         return password[0]
+
+    def getPassword(self):
+        self.__cursor.execute('select password from Pessoa')
+        password = self.__cursor.fetchall()
+        return password
 
     def getConexao(self):
         return self.__conexao
