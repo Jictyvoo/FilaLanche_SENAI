@@ -1,4 +1,4 @@
-import MySQLdb
+import mySQLdb
 from datetime import datetime
 
 from sourceCode.mainProgram.models.Pessoa import Pessoa
@@ -35,6 +35,8 @@ class DatabaseController:
 
     def getPerson(self):
         return Pessoa(self.conexao)
+    def getAdmin(self):
+        return Administrador(self.conexao)
 
     def getid(self,cpf,senha):
         self.cursor.execute('select id_pessoa from Estudante where cpf = %d && senha =%s' %(cpf,senha))
@@ -52,6 +54,8 @@ class DatabaseController:
             if int(i) == id_pessoa:
                 return 1
         return 2
+
+
 
 
     def getTodosProdutos(self):  # retorna todos os produtos existentes no banco

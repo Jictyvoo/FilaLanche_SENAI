@@ -5,7 +5,8 @@ class Administrador(DatabaseManipulator):
         super(Administrador, self).__init__(conexao)
 
     def cadastrarPessoa(self,nome,cpf,rg,data_nascimento,senha):
-        self.__cursor.execute('insert into Pessoa(nome,cpf,rg,data_nascimento,password) values ("%s","%d","%d","%s","%s")' %(nome,cpf,rg,data_nascimento,senha))
+        dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
+        self.__cursor.execute('insert into Pessoa(nome,cpf,rg,data_nascimento,password) values ("%s","%d","%d","%s","%s")' %(nome,cpf,rg,ano + "-" + mes + "-" + dia,senha))
         self.__cursor.execute('select id_pessoa from Pessoa where cpf = %d' %cpf)
         self.__conexao.commit()
         return int(self.__cursor.fetchone[0])
@@ -14,15 +15,17 @@ class Administrador(DatabaseManipulator):
         self.__cursor.execute('insert into Administrador(id_pessoa,cargo,matricula) values ("%d","%s","%d")' %(id,cargo,matricula))
         self.__conexao.commit()
 
-    def cadastrarEstudante(self, nome, id, id_turma, data_nascimento):  # metodo para instanciar um novo estudante
-        dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
-        self.__cursor.execute('select * from Turma where id_turma = %d' % id_turma)
-        turma = str(self.__cursor.fetchone())
-        self.__cursor.execute(
-            'insert into Estudante(matricula,nome,turma,data_nascimento) values("%d", "%s","%s","%s")' %
-            (id, nome, turma, ano + "-" + mes + "-" + dia))  # insere o estudante no banco de dados
-        self.__conexao.commit()
+    def getidsala(self,turma):
+        self.__cursor.execute('select id_sala from Sala_Horario where nome_sala = "%s"' %(turma))
+        return int(self.__cursor.fetchone()[0])
+    def getidturma(self,turma):
+        self.__cursor.execute('select id_turma from Turma where nome = "%s"' %turma)
+        return int(self.__cursor.fetchone()[0])
 
+    def cadastrarEstudante(self,id,turma):  # metodo para instanciar um novo estudante
+        idsala = self.getidsala(turma)
+        idturma = self.getidturma(turma)
+        self.__cursor.execute('insert into Estudante(id_pessoa,id_sala,id_turma) values ("%d","%d","%d")' %(id,idsala,idturma))
 
     def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
         self.__cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (

@@ -15,18 +15,8 @@ class Interface:
 
     def cadastrarEstudante(self):
         turmaEstudante = ""
-        idEstudante = 0
         nomeEstudante = ""
         data_nascimento = "00-00-00"
-        wrongInput = True
-        while (wrongInput):
-            try:
-                os.system("cls || clear")
-                print("Insira o ID do Estudante")
-                idEstudante = int(input("__.> "))
-                wrongInput = False
-            except(ValueError):
-                wrongInput = True
         wrongInput = True
         while (wrongInput):
             try:
@@ -54,10 +44,35 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
-        self.controller.cadastrarEstudante(nomeEstudante, idEstudante, turmaEstudante, data_nascimento)
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Digite o seu CPF:")
+                cpf = int(input("__.> "))
+                wrongInput = False
+            except():
+                wrongInput = True
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Digite o seu RG:")
+                rg = int(input("__.> "))
+                wrongInput = False
+            except():
+                wrongInput = True
+        while (wrongInput):
+            try:
+                os.system("cls || clear")
+                print("Digite a sua senha : ")
+                senha = str(input("__.> "))
+                wrongInput = False
+            except():
+                wrongInput = True
+        id = self.controller.getAdmin().cadastrarPessoa(nomeEstudante,cpf,rg,data_nascimento,senha)
+        self.controller.getAdmin().cadastrarEstudante(id,turmaEstudante)
         os.system("cls || clear")
         print("Cadastro realizado com sucesso!")
-        return idEstudante
+        return id
 
     def realizarPedido(self, idEstudante):
         for index, value in enumerate(self.controller.getProdutos()):
@@ -102,8 +117,16 @@ class Interface:
                 self.realizarPedido(id)
             elif(tipo ==1):
                 print("Seja bem vindo Administrador")
-                print("Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
-                      "5-Atribuir horários de intervalo às turmas")
+                opcao=int(input(("Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
+                      "5-Atribuir horários de intervalo às turmas")))
+                if(opcao==1):
+
+                    '''
+                #elif(opcao==2):
+                #elif(opcao==3):
+                #elif(opcao==4):
+                '''
+
             elif(tipo==2):
                 print("Seja bem vinda Atendente da Cantina")
                 print("Menu:\n1- Cadastrar Produtos\nVerificar Lucro do dia")
