@@ -32,7 +32,8 @@ PRIMARY KEY(id_pessoa)
 
 CREATE TABLE if not exists Turma(
 id_turma int not null auto_increment,
-nome varchar(30) not null
+nome varchar(30) not null,
+PRIMARY KEY(id_turma)
 );
 
 CREATE TABLE if not exists Estudante (

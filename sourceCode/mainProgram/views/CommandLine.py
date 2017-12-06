@@ -109,7 +109,7 @@ class Interface:
         cpf = int(input("Digite o seu cpf para continuar!"))
         senha = input("Digite a sua senha para continuar!")
         if self.valida(senha,cpf)== 0:
-            id = int(self.controller.getid(cpf,senha))
+            id = int(self.controller.getId(cpf, senha))
             tipo = int(self.controller.getTipo(id))
             if(tipo == 0):
                 print("Seja bem vindo estudante!")

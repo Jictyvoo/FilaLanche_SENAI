@@ -6,6 +6,10 @@ class Pessoa(DatabaseManipulator):
         super(Pessoa, self).__init__(conexao)
         self.__cursor = conexao.cursor()
 
+    def getPessoa(self, id_pessoa):
+        self.__cursor.execute('select * from Pessoa where id_pessoa = "%d"' % id_pessoa)
+        return self.__cursor.fetchone()
+
     def getCpfs(self):
         self.__cursor.execute('select cpf from Pessoa')
         return self.__cursor.fetchall()
