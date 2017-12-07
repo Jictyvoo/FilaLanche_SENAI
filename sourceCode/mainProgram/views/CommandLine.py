@@ -3,7 +3,6 @@ import os
 from sourceCode.mainProgram.controllers.DatabaseController import DatabaseController
 
 
-
 class Interface:
     def __init__(self):
         self.controller = DatabaseController()
@@ -17,6 +16,9 @@ class Interface:
         turmaEstudante = ""
         nomeEstudante = ""
         data_nascimento = "00-00-00"
+        cpf = 0
+        rg = 0
+        senha = ""
         wrongInput = True
         while (wrongInput):
             try:
@@ -68,8 +70,8 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
-        id = self.controller.getAdmin().cadastrarPessoa(nomeEstudante,cpf,rg,data_nascimento,senha)
-        self.controller.getAdmin().cadastrarEstudante(id,turmaEstudante)
+        id = self.controller.getAdmin().cadastrarPessoa(nomeEstudante, cpf, rg, data_nascimento, senha)
+        self.controller.getAdmin().cadastrarEstudante(id, turmaEstudante)
         os.system("cls || clear")
         print("Cadastro realizado com sucesso!")
         return id
@@ -93,45 +95,53 @@ class Interface:
             elif codigoRetorno == 1:
                 print("Pedido Realizado com sucesso!")
 
-    def valida(self,senha,cpf):
+    def valida(self, senha, cpf):
         senhas = self.controller.getPerson().getPassword()
         cpfs = self.controller.getPerson().getCpfs()
-        for i in cpfs:
-            if int(i)==cpf:
-                for m in senhas:
-                    if m == senha:
+        for index, value in enumerate(cpfs):
+            if int(value[0]) == cpf:
+                for senhaIndex, senhaValue in enumerate(senhas):
+                    if senhaValue[0] == senha:
                         return 0
                 return 1
         return -1
 
     def mainLoop(self):
         print("Seja bem vindo ao sistema de lanches do senai")
-        cpf = int(input("Digite o seu cpf para continuar!"))
-        senha = input("Digite a sua senha para continuar!")
-        if self.valida(senha,cpf)== 0:
+        entrada = input("Digite o seu cpf para continuar!\n__.> ")
+        if (entrada == ""):
+            return False
+
+        cpf = int(entrada)
+        senha = input("Digite a sua senha para continuar!\n__.> ")
+        retorno = self.valida(senha, cpf)
+        if retorno == 0:
             id = int(self.controller.getId(cpf, senha))
             tipo = int(self.controller.getTipo(id))
-            if(tipo == 0):
+            if (tipo == 0):
                 print("Seja bem vindo estudante!")
                 print("Menu :\n1- Fazer Pedido")
                 self.realizarPedido(id)
-            elif(tipo ==1):
+            elif (tipo == 1):
                 print("Seja bem vindo Administrador")
-                opcao=int(input(("Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
-                      "5-Atribuir horários de intervalo às turmas")))
-                if(opcao==1):
-
+                opcao = int(input((
+                    "Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
+                    "5-Atribuir horários de intervalo às turmas")))
+                if (opcao == 1):
+                    print("algo")
                     '''
                 #elif(opcao==2):
                 #elif(opcao==3):
                 #elif(opcao==4):
                 '''
 
-            elif(tipo==2):
+            elif (tipo == 2):
                 print("Seja bem vinda Atendente da Cantina")
                 print("Menu:\n1- Cadastrar Produtos\nVerificar Lucro do dia")
 
-        elif self.valida(senha,cpf)== 1:
+        elif retorno == 1:
             print("Senha não corresponde com o CPF indicado")
-        elif self.valida(senha,cpf)==-1:
+        elif retorno == -1:
             print("Cpf não registrado no sistema!")
+
+        return True

@@ -6,7 +6,7 @@ class Pedido(DatabaseManipulator):
     def __init__(self, conexao):
         super(Pedido, self).__init__(conexao)
 
-    def novoPedido(self, idEstudante, listaProdutos, getEstudante, podeComprar):  # funcao que realiza um novo pedido
+    def novoPedido(self, idEstudante, listaProdutos, getEstudante, podeComprar, getNomeTurma):  # funcao que realiza um novo pedido
         foundedStudent = getEstudante(idEstudante)  # busca o estudante no banco de dados
         if len(foundedStudent) > 0:  # se encontrar algum estudante
 
@@ -19,10 +19,11 @@ class Pedido(DatabaseManipulator):
             else:  # considera que esta no turno da noite
                 turno = 3
 
-            turmaEncontrada = foundedStudent[4]  # pega a turma do estudante
-            self.__cursor.execute(
+            idTurmaEncontrada = foundedStudent[3]  # pega a turma do estudante
+            turmaEncontrada = getNomeTurma(idTurmaEncontrada)
+            self.getCursor().execute(
                 'select * from Sala_Horario where ocupado = "%s"' % turmaEncontrada)  # busca a sala em que a turma esta alocada
-            horarioTurno = self.__cursor.fetchone()
+            horarioTurno = self.getCursor().fetchone()
             if not horarioTurno:  # se nao existe a turma alocada em sala
                 return -1  # retorna o codigo referente ao fato da turma nao estar em sala alguma
             horarioSala = str(horarioTurno[turno])
@@ -30,10 +31,10 @@ class Pedido(DatabaseManipulator):
             if podeComprar(horarioSala):  # verifica se o horario permite compra de item
                 for index, value in enumerate(listaProdutos):
                     produto = value.split(";")
-                    self.__cursor.execute(
+                    self.getCursor().execute(
                         'call processar_pedido("%s", "%d", now(), "%s")' % (produto[0], idEstudante,
                                                                             produto[1]))
-                    self.__conexao.commit()
+                    self.getConexao().commit()
                 return 1  # retorna 1 se houver sucesso
             else:
                 return -2  # retorna -2 se nao estiver no horario de compra da sala
@@ -61,8 +62,8 @@ class Pedido(DatabaseManipulator):
         return pedido  # retorna o pedido realizado
 
     def listarPedidos(self):  # metodo para listar todos os pedidos do banco de dados
-        self.__cursor.execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
+        self.getCursor().execute('select * from estudante inner join pedido on estudante.matricula = pedido.matricula')
         lista = []
-        for linha in self.__cursor.fetchall():  # adiciona varias tuplas na lista de pedidos
+        for linha in self.getCursor().fetchall():  # adiciona varias tuplas na lista de pedidos
             lista.append((linha[2], linha[5], linha[6], linha[7], linha[8]))
         return lista

@@ -8,3 +8,6 @@ class DatabaseManipulator:
 
     def setConexao(self, conexao):
         self.__conexao = conexao
+
+    def getCursor(self):
+        return self.__cursor

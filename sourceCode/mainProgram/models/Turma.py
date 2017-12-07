@@ -6,13 +6,17 @@ class Turma(DatabaseManipulator):
         super(Turma, self).__init__(conexao)
 
     def getConexao(self):
-        return self.__conexao
+        return self.getConexao()
+
+    def getIdTurma(self, turma):
+        self.getCursor().execute('select id_turma from Turma where nome = "%s"' % turma)
+        return int(self.getCursor().fetchone()[0])
 
     def getNome(self, id_turma):
-        self.__cursor.execute('select nome from Produto where id_pessoa = "%d"' % id_turma)
-        nome = self.__cursor.fetchone()
+        self.getCursor().execute('select nome from Turma where id_turma = "%d"' % id_turma)
+        nome = self.getCursor().fetchone()
         return nome[0]
 
     def setNome(self, id_turma, nome):
-        self.__cursor.execute('update Produto set nome = "%s" where id_pessoa = "%d"' % nome, id_turma)
-        self.__conexao.commit()
+        self.getCursor().execute('update Produto set nome = "%s" where id_pessoa = "%d"' % nome, id_turma)
+        self.getConexao().commit()
