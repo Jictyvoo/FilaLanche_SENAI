@@ -46,6 +46,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+        wrongInput = True
         while (wrongInput):
             try:
                 os.system("cls || clear")
@@ -54,6 +55,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+        wrongInput = True
         while (wrongInput):
             try:
                 os.system("cls || clear")
@@ -62,6 +64,7 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+        wrongInput = True
         while (wrongInput):
             try:
                 os.system("cls || clear")
@@ -70,11 +73,19 @@ class Interface:
                 wrongInput = False
             except():
                 wrongInput = True
+
         id = self.controller.getAdmin().cadastrarPessoa(nomeEstudante, cpf, rg, data_nascimento, senha)
-        self.controller.getAdmin().cadastrarEstudante(id, turmaEstudante)
+        a = self.controller.cadastrarEstudante(id, turmaEstudante)
         os.system("cls || clear")
-        print("Cadastro realizado com sucesso!")
-        return id
+        if a==0:
+            print("Turma não alocada na sala")
+            return -1
+        elif a==1:
+            print("Cadastro realizado com sucesso!")
+            return id
+        elif a==-1:
+            print("Turma não registrada no sistema!")
+            return -2
 
     def realizarPedido(self, idEstudante):
         for index, value in enumerate(self.controller.getProdutos()):
@@ -128,8 +139,7 @@ class Interface:
                     "Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
                     "5-Atribuir horários de intervalo às turmas")))
                 if (opcao == 1):
-                    print("algo")
-                    '''
+                    self.cadastrarEstudante()
                 #elif(opcao==2):
                 #elif(opcao==3):
                 #elif(opcao==4):
@@ -145,3 +155,5 @@ class Interface:
             print("Cpf não registrado no sistema!")
 
         return True
+        
+        '''

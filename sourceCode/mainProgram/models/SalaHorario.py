@@ -15,7 +15,11 @@ class SalaHorario(DatabaseManipulator):
 
     def getIdSala(self, turma):
         self.getCursor().execute('select id_sala from Sala_Horario where ocupado = "%s"' % (turma))
-        return int(self.getCursor().fetchone()[0])
+        a = self.getCursor().fetchone()
+        if a is None:
+            return -1
+        else:
+            return int(a[0])
 
     def getNomeSala(self, id_sala):
         self.getCursor().execute('select nome_sala from Sala_Horario where id_sala = "%d"' % id_sala)
