@@ -10,7 +10,11 @@ class Turma(DatabaseManipulator):
 
     def getIdTurma(self, turma):
         self.getCursor().execute('select id_turma from Turma where nome = "%s"' % turma)
-        return int(self.getCursor().fetchone()[0])
+        a = self.getCursor().fetchone()
+        if a is None:
+            return -1
+        else:
+            return int(a[0])
 
     def getNome(self, id_turma):
         self.getCursor().execute('select nome from Turma where id_turma = "%d"' % id_turma)

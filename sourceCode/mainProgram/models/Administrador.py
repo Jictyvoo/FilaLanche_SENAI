@@ -10,9 +10,10 @@ class Administrador(DatabaseManipulator):
         self.getCursor().execute(
             'insert into Pessoa(nome,cpf,rg,data_nascimento,password) values ("%s","%d","%d","%s","%s")' % (
                 nome, cpf, rg, ano + "-" + mes + "-" + dia, senha))
-        self.getCursor().execute('select id_pessoa from Pessoa where cpf = %d' % cpf)
         self.getConexao().commit()
-        return int(self.getCursor().fetchone[0])
+
+        self.getCursor().execute('select id_pessoa from Pessoa where cpf = "%d"' % cpf)
+        return int(self.getCursor().fetchone()[0])
 
     def cadastrarAdministrador(self, id, cargo, matricula):
         self.getCursor().execute(
@@ -20,10 +21,19 @@ class Administrador(DatabaseManipulator):
         self.getConexao().commit()
 
     def cadastrarEstudante(self, id, turma, getIdSala, getIdTurma):  # metodo para instanciar um novo estudante
-        idsala = getIdSala(turma)
-        idturma = getIdTurma(turma)
-        self.getCursor().execute(
-            'insert into Estudante(id_pessoa,id_sala,id_turma) values ("%d","%d","%d")' % (id, idsala, idturma))
+        idrecebido = getIdSala(turma)
+        turmarecebida = getIdTurma(turma)
+        if(idrecebido==0):
+            idsala = idrecebido
+        else:
+            return 0
+        if(turmarecebida==0):
+            idturma = turmarecebida
+            self.getCursor().execute(
+                    'insert into Estudante(id_pessoa,id_sala,id_turma) values ("%d","%d","%d")' % (id, idsala, idturma))
+            return 1
+        else:
+            return -1
 
     def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
         self.getCursor().execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (

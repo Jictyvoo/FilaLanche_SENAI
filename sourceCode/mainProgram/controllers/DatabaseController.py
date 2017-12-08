@@ -50,7 +50,7 @@ class DatabaseController:
             if int(i[0]) == id_pessoa:
                 return 0
         self.__cursor.execute('select id_pessoa from Administrador')
-        ids = self.__cursor.fecthall()
+        ids = self.__cursor.fetchall()
         for i in ids:
             if int(i[0]) == id_pessoa:
                 return 1
@@ -62,12 +62,9 @@ class DatabaseController:
     def getProdutos(self):  # retorna todos os produtos do banco que possuam disponibilidade de venda
         return self.__produtos.getProdutos()
 
-    '''def cadastrarEstudante(self, nome, id, turma, data_nascimento):  # metodo para instanciar um novo estudante
-        dia, mes, ano = data_nascimento.split("-")  # separa a data de nascimento do estudante
-        self.__cursor.execute(
-            'insert into Estudante(matricula,nome,turma,data_nascimento) values("%d", "%s","%s","%s")' % (
-                id, nome, turma, ano + "-" + mes + "-" + dia))  # insere o estudante no banco de dados
-        self.__conexao.commit()'''
+    def cadastrarEstudante(self, id, turma):  # metodo para instanciar um novo estudante
+        a =  self.__administradores.cadastrarEstudante(id,turma,self.__salas_horarios.getIdSala, self.__turma.getIdTurma)
+        return a
 
     def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         return self.__estudantes.getEstudante(idEstudante)
