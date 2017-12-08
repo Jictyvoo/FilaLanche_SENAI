@@ -6,7 +6,8 @@ class Pedido(DatabaseManipulator):
     def __init__(self, conexao):
         super(Pedido, self).__init__(conexao)
 
-    def novoPedido(self, idEstudante, listaProdutos, getEstudante, podeComprar, getNomeTurma):  # funcao que realiza um novo pedido
+    def novoPedido(self, idEstudante, listaProdutos, getEstudante, podeComprar,
+                   getNomeTurma):  # funcao que realiza um novo pedido
         foundedStudent = getEstudante(idEstudante)  # busca o estudante no banco de dados
         if len(foundedStudent) > 0:  # se encontrar algum estudante
 
@@ -32,8 +33,8 @@ class Pedido(DatabaseManipulator):
                 for index, value in enumerate(listaProdutos):
                     produto = value.split(";")
                     self.getCursor().execute(
-                        'call processar_pedido("%s", "%d", now(), "%s")' % (produto[0], idEstudante,
-                                                                            produto[1]))
+                        'call processar_pedido("%s", "%d", "%s")' % (produto[0], idEstudante,
+                                                                     produto[1]))
                     self.getConexao().commit()
                 return 1  # retorna 1 se houver sucesso
             else:

@@ -112,7 +112,8 @@ class DatabaseController:
         return False
 
     def novoPedido(self, idEstudante, listaProdutos):  # funcao que realiza um novo pedido
-        return self.__pedidos.novoPedido(idEstudante, listaProdutos, self.__estudantes.getEstudante, self.podeComprar, self.__turma.getNome)
+        return self.__pedidos.novoPedido(idEstudante, listaProdutos, self.__estudantes.getEstudante, self.podeComprar,
+                                         self.__turma.getNome)
 
     def registrarLucro(self):
         self.__cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')
