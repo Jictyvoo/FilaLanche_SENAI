@@ -18,8 +18,9 @@ class DatabaseController:
             self.__conexao.select_db('Fila_Lanche_SENAI')
         except MySQLdb.DatabaseError:  # caso nao consiga, significa que ele nao existe
             self.executarSQL("../../../database/FilaLanche_SENAI_database.sql")  # executa o sql de criacao do banco
+            self.executarSQL("../../../database/FilaLanche_SENAI_procedures.sql")  # executa o sql de criacao de proced
             self.__cursor.close()  # fecha o __cursor para evitar erro
-            self.__cursor = self.__conexao.__cursor()  # cria um novo __cursor
+            self.__cursor = self.__conexao.cursor()  # cria um novo __cursor
             firstConnection = True
 
         self.__pessoas = Pessoa(self.__conexao)
@@ -155,17 +156,27 @@ class DatabaseController:
 
         comandos = []  # cria a lista que ira armazenar os comandos
         tempComando = ""  # string temporaria para armazenar o comando
+
+        delimiter = ";"
+
         for index, value in enumerate(linhasCriacao):  # varre todas as linhas
+            testingDelimiter = value.split("delimiter")
+            if len(testingDelimiter) > 1:
+                delimiter = testingDelimiter[1].replace(" ", "")
+                comandos.append(value)
+                tempComando = ""
+                continue
+
             tempComando = tempComando + value + " "  # vai adicionando o conteudo de cada uma das linhas na string temporaria
             tamanho = len(value) - 1
             if tamanho > 0:  # verifica se naquela linha existe algum comando
-                if value[tamanho] == ";":  # se possuir um ';' no final da linha, adiciona o comando na lista
+                if value[tamanho] == delimiter:  # se possuir um ';' no final da linha, adiciona o comando na lista
                     comandos.append(tempComando)
                     tempComando = ""
-
         return comandos
 
     def executarSQL(self, arquivo_sql):  # pega a lista de comandos sql e executa
         comandos = self.carregarSQL(arquivo_sql)
-        for i, value in enumerate(comandos):
+        print(comandos)
+        for index, value in enumerate(comandos):
             self.__cursor.execute(value)
