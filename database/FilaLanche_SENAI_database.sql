@@ -65,4 +65,5 @@ FOREIGN KEY(id_produto) REFERENCES Produto(id_produto),
 FOREIGN KEY(id_estudante) REFERENCES Estudante(id_estudante)
 );
 
-INSERT INTO Pessoa values (1, 2147483647, 'admin@root', 967503721, 'root', '1970-01-01');
+INSERT INTO Pessoa VALUES (1, 0, 'admin@root', 967503721, 'root', '1970-01-01');
+INSERT INTO Administrador VALUES ('1', '1', 'root', '0');

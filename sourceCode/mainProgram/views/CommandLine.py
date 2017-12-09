@@ -77,13 +77,13 @@ class Interface:
         id = self.controller.cadastrarPessoa(nomeEstudante, cpf, rg, data_nascimento, senha)
         a = self.controller.cadastrarEstudante(id, turmaEstudante)
         os.system("cls || clear")
-        if a==0:
+        if a == 0:
             print("Turma não alocada na sala ou sala não existente")
             return -1
-        elif a==1:
+        elif a == 1:
             print("Cadastro realizado com sucesso!")
             return id
-        elif a==-1:
+        elif a == -1:
             print("Turma não registrada no sistema!")
             return -2
 
@@ -130,14 +130,15 @@ class Interface:
     def cadastrarHorarioIntervalo(self):
         tipo = input("Você gostaria de adicionar o horário de intervalo para\n 1 - manhã\n2-tarde\n3 - noite")
 
-
     def mainLoop(self):
         print("Seja bem vindo ao sistema de lanches do senai\n")
         entrada = input("Digite o seu cpf para continuar!\n__.> ")
         if (entrada == ""):
             return False
-
-        cpf = int(entrada)
+        try:
+            cpf = int(entrada)
+        except:
+            return True
         senha = input("Digite a sua senha para continuar!\n__.> ")
         retorno = self.valida(senha, cpf)
         if retorno == 0:
@@ -146,30 +147,29 @@ class Interface:
             if (tipo == 0):
                 print("Seja bem vindo estudante!")
                 loopi = True
-                while(loopi):
+                while (loopi):
                     perg = input("Menu :\n1- Fazer Pedido\n2-Sair\n")
-                    if perg==1:
+                    if perg == 1:
                         self.realizarPedido(id)
-                    elif perg==2:
+                    elif perg == 2:
                         loopi = False
             elif (tipo == 1):
                 loopi = True
-                while(loopi):
+                while (loopi):
                     print("Seja bem vindo Administrador")
-                    while(loopi):
+                    while (loopi):
                         opcao = int(input((
                             "Menu:\n1- Cadastrar Aluno\n2-Cadastrar Sala\n3-Cadastrar Turmas\n4-Cadastrar horários de intervalo\n"
                             "5-Atribuir horários de intervalo às turmas\n6- Sair\n")))
                         if (opcao == 1):
                             self.cadastrarEstudante()
-                        elif(opcao==2):
+                        elif (opcao == 2):
                             self.cadastrarSala()
-                      #  elif(opcao==3):
+                            #  elif(opcao==3):
 
                         elif (opcao == 6):
                             loopi = False
                         ''''#elif(opcao==4):'''
-
 
                     '''
 
@@ -182,6 +182,7 @@ class Interface:
         elif retorno == -1:
             print("Cpf não registrado no sistema!")
 
-        return True
+        
         
         '''
+        return True

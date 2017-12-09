@@ -64,16 +64,19 @@ class DatabaseController:
         return self.__produtos.getProdutos()
 
     def cadastrarEstudante(self, id, turma):  # metodo para instanciar um novo estudante
-        a =  self.__administradores.cadastrarEstudante(id,turma,self.__salas_horarios.getIdSala, self.__turma.getIdTurma)
+        a = self.__administradores.cadastrarEstudante(id, turma, self.__salas_horarios.getIdSala,
+                                                      self.__turma.getIdTurma)
         return a
 
-    def cadastrarPessoa(self,nome, cpf, rg, data_nascimento, senha):
-        self.__administradores.cadastrarPessoa(nome,cpf,rg,data_nascimento,senha)
+    def cadastrarPessoa(self, nome, cpf, rg, data_nascimento, senha):
+        self.__administradores.cadastrarPessoa(nome, cpf, rg, data_nascimento, senha)
+
     def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         return self.__estudantes.getEstudante(idEstudante)
 
-    def cadastrarSala(self,nome):
+    def cadastrarSala(self, nome):
         self.__administradores.cadastrarSala(nome)
+
     '''def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
         self.__cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
             nome_sala, manha, tarde, noite))
@@ -82,27 +85,14 @@ class DatabaseController:
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.__salas_horarios.getSala(idSala)
 
-    def cadastrarTurma(self,nome):
+    def cadastrarTurma(self, nome):
         self.__administradores.cadastrarTurma(nome)
-
-    #def cadastrarintervalo(self):
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.__cursor.execute(
             'insert into Produto(nome, preco, quantidade) values("%s", "%f", "%d")' % (
                 nome, float(preco), int(quantidade)))  # insere o produto no banco de dados
         self.__conexao.commit()
-
-    '''def vendeProduto(self, listaDeProdutos):  # metodo para remover itens existentes
-        for (index, value) in enumerate(listaDeProdutos):  # procura o produto na lista de pedidos
-            informacao = value.split(";")
-            self.__cursor.execute('select quantidade from Produto where id_produto = "%d"' % int(
-                informacao[0]))  # busca o produto que existe na lista de pedido e pega a quantidade disponivel de itens
-            quantidadeAnterior = self.__cursor.fetchone()[0]
-            self.__cursor.execute('update Produto set quantidade = "%d" where id_produto = "%d"' %
-                                  (int(quantidadeAnterior) - int(informacao[1]),
-                                   int(informacao[0])))  # retira a quantidade comprada de produtos do banco de dados
-            self.__conexao.commit()'''
 
     def podeComprar(self, horarioSala):  # metodo que verifica o horario para saber se pode ou nao fazer o pedido
         now = str(datetime.now().hour) + ":" + str(datetime.now().minute)
@@ -169,20 +159,21 @@ class DatabaseController:
             testingDelimiter = value.split("delimiter")
             if len(testingDelimiter) > 1:
                 delimiter = testingDelimiter[1].replace(" ", "")
-                comandos.append(value)
                 tempComando = ""
                 continue
 
             tempComando = tempComando + value + " "  # vai adicionando o conteudo de cada uma das linhas na string temporaria
             tamanho = len(value) - 1
             if tamanho > 0:  # verifica se naquela linha existe algum comando
-                if value[tamanho] == delimiter:  # se possuir um ';' no final da linha, adiciona o comando na lista
-                    comandos.append(tempComando)
+                if len(value.split(delimiter)) == 2:  # se possuir um ';' no final da linha, adiciona o comando na lista
+                    if delimiter == ";":
+                        comandos.append(tempComando)
+                    else:
+                        comandos.append(tempComando.replace(delimiter, ""))
                     tempComando = ""
         return comandos
 
     def executarSQL(self, arquivo_sql):  # pega a lista de comandos sql e executa
         comandos = self.carregarSQL(arquivo_sql)
-        print(comandos)
         for index, value in enumerate(comandos):
             self.__cursor.execute(value)
