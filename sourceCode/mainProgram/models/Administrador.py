@@ -35,9 +35,38 @@ class Administrador(DatabaseManipulator):
         else:
             return -1
 
-    def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
-        self.getCursor().execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
-            nome_sala, manha, tarde, noite))
+    def cadastrarSala(self, nome_sala):  # metodo para instanciar um novo estudante
+        self.getCursor().execute('insert into sala_horario(nome_sala) values("%s")' % (
+            nome_sala))
+        self.getConexao().commit()
+
+    def cadastrarintervalo(self,hora,sala,horario):
+        if(hora==1):
+            try:
+                self.getCursor().execute('update Sala_Horario set manha = "%s" where nome_sala = "%s"'%horario,sala)
+                self.getConexao().commit()
+                return 0
+            except:
+                return -1
+        elif(hora==2):
+            try:
+                self.getCursor().execute('update Sala_Horario set tarde = "%s" where nome_sala = "%s"'%horario,sala)
+                self.getConexao().commit()
+                return 0
+            except:
+                return -1
+        elif(hora == 3):
+            try:
+                self.getCursor().execute('update Sala_Horario set noite = "%s" where nome_sala = "%s"' % horario, sala)
+                self.getConexao().commit()
+                return 0
+            except:
+                return -1
+
+
+
+    def cadastrarTurma(self,nome):
+        self.getCursor().execute('insert into turma(nome) values ("%s")' %(nome))
         self.getConexao().commit()
 
     def alocarTurmasSalas(self, turma, nomeSala):  # metodo para alocar as turmas a uma sala

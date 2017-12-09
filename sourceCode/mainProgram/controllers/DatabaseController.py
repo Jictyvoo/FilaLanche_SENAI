@@ -66,9 +66,13 @@ class DatabaseController:
         a =  self.__administradores.cadastrarEstudante(id,turma,self.__salas_horarios.getIdSala, self.__turma.getIdTurma)
         return a
 
+    def cadastrarPessoa(self,nome, cpf, rg, data_nascimento, senha):
+        self.__administradores.cadastrarPessoa(nome,cpf,rg,data_nascimento,senha)
     def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         return self.__estudantes.getEstudante(idEstudante)
 
+    def cadastrarSala(self,nome):
+        self.__administradores.cadastrarSala(nome)
     '''def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
         self.__cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
             nome_sala, manha, tarde, noite))
@@ -76,6 +80,11 @@ class DatabaseController:
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.__salas_horarios.getSala(idSala)
+
+    def cadastrarTurma(self,nome):
+        self.__administradores.cadastrarTurma(nome)
+
+    #def cadastrarintervalo(self):
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
         self.__cursor.execute(
