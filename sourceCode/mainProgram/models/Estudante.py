@@ -18,20 +18,12 @@ class Estudante(DatabaseManipulator):
         id_pessoa = self.getCursor().fetchone()
         return id_pessoa[0]
 
-    def getIdSala(self, id_estudante):
-        self.getCursor().execute('select id_sala from Estudante where id_estudante = "%d"' % id_estudante)
-        id_sala = self.getCursor().fetchone()
-        return id_sala[0]
-
-    def setIdSala(self, id_estudante, id_sala):
-        self.getCursor().execute('update Estudante set id_sala = "%d" where id_estudante = "%d"' % id_sala, id_estudante)
-        self.getConexao().commit()
-
     def getIdTurma(self, id_estudante):
         self.getCursor().execute('select id_turma from Estudante where id_estudante = "%d"' % id_estudante)
         id_turma = self.getCursor().fetchone()
         return id_turma[0]
 
     def setIdTurma(self, id_estudante, id_turma):
-        self.getCursor().execute('update Estudante set id_turma = "%d" where id_estudante = "%d"' % id_turma, id_estudante)
+        self.getCursor().execute('update Estudante set id_turma = "%d" where id_estudante = "%d"' % id_turma,
+                                 id_estudante)
         self.getConexao().commit()

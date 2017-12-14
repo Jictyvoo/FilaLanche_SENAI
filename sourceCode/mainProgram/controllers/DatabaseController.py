@@ -34,7 +34,7 @@ class DatabaseController:
             self.__produtos.carregarProdutosEmEstoque()  # le o arquivo csv e carrega no banco
             self.__salas_horarios.carregarSalas()  # le o arquivo csv e carrega no banco
 
-    def getId(self, cpf, senha):
+    def getIdPerson(self, cpf, senha):
         self.__cursor.execute('select id_pessoa from Pessoa where cpf = "%d" and password ="%s"' % (cpf, senha))
         returnedId = self.__cursor.fetchone()
         if returnedId:
@@ -43,7 +43,7 @@ class DatabaseController:
             return returnedId
 
     def validatePerson(self, cpf, senha):
-        if self.getId(cpf, senha):  # verifica se possui a pessoa no banco de dados com aquela senha
+        if self.getIdPerson(cpf, senha):  # verifica se possui a pessoa no banco de dados com aquela senha
             return 0
         self.__cursor.execute('select id_pessoa from Pessoa where cpf = "%d"' % cpf)
         if self.__cursor.fetchone():  # se não existir verifica se existe o cpf
@@ -119,9 +119,9 @@ class DatabaseController:
         id_sala = self.__salas_horarios.getIdSalaHorario(sala)
         if id_sala:
             return self.__administradores.cadastrarintervalo(hora, int(id_sala[0]),
-                                                         horario, self.__salas_horarios.setManha,
-                                                         self.__salas_horarios.setTarde,
-                                                         self.__salas_horarios.setNoite)
+                                                             horario, self.__salas_horarios.setManha,
+                                                             self.__salas_horarios.setTarde,
+                                                             self.__salas_horarios.setNoite)
         return -1
 
     def registrarLucro(self):  # registra o lucro do dia

@@ -117,8 +117,15 @@ class Interface:
 
     def cadastraproduto(self):
         quantidade = 0
+        preco = 0
         nome = input("Digite o nome do produto\n__.> ")
-        preco = float(input("Digite o preço do produto\n__.> "))
+        wrongInput = True
+        while wrongInput:
+            try:
+                preco = float(input("Digite o preço do produto\n__.> "))
+                wrongInput = False
+            except:
+                print("Valor Incorreto")
 
         wrongInput = True
         while wrongInput:
@@ -201,7 +208,7 @@ class Interface:
         senha = input("Digite a sua senha para continuar!\n__.> ")
         retorno = self.valida(senha, cpf)
         if retorno == 0:
-            id = int(self.controller.getId(cpf, senha))
+            id = int(self.controller.getIdPerson(cpf, senha))
             if not id:
                 return True
             tipo = int(self.controller.getTipo(id))
@@ -209,10 +216,10 @@ class Interface:
                 print("Seja bem vindo estudante!")
                 loopi = True
                 while (loopi):
-                    perg = input("Menu :\n[1]- Fazer Pedido\n[2]-Sair\n__.> ")
+                    perg = input("Menu :\n[1]- Fazer Pedido\n[]-Sair\n__.> ")
                     if perg == "1":
                         self.realizarPedido(self.controller.getIdEstudante(id))
-                    elif perg == "2":
+                    else:
                         loopi = False
             elif (tipo == 1):
                 loopi = True
@@ -220,7 +227,7 @@ class Interface:
                     print("Seja bem vindo Administrador")
                     while (loopi):
                         opcao = input(
-                            "Menu:\n[0] - Cadastrar Pessoa\n[1]- Cadastrar Aluno\n[2]-Cadastrar Sala\n[3]-Cadastrar Turmas\n[4]-Cadastrar horários de intervalo\n[5] - Alocar Turma na sala\n"
+                            "Menu:\n[0] - Cadastrar Pessoa\n[1] - Cadastrar Aluno\n[2] - Cadastrar Sala\n[3] - Cadastrar Turmas\n[4] - Cadastrar horários de intervalo\n[5] - Alocar Turma na sala\n"
                             "[]- Sair\n__.> ")
                         if (opcao == "0"):
                             self.cadastrarPessoa()

@@ -39,11 +39,9 @@ PRIMARY KEY(id_turma)
 CREATE TABLE if not exists Estudante (
 id_estudante int not null auto_increment,
 id_pessoa int not null,
-id_sala int,
 id_turma int,
 PRIMARY KEY(id_estudante),
 FOREIGN KEY(id_pessoa) REFERENCES Pessoa(id_pessoa),
-FOREIGN KEY(id_sala) REFERENCES Sala_Horario(id_sala),
 FOREIGN KEY(id_turma) REFERENCES Turma(id_turma)
 );
 

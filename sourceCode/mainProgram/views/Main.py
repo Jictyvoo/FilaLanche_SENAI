@@ -8,4 +8,3 @@ interface = Interface()
 
 while (interface.mainLoop()):
     os.system("cls")
-

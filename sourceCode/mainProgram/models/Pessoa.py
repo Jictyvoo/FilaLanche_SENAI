@@ -47,18 +47,13 @@ class Pessoa(DatabaseManipulator):
 
     def setDataNascimento(self, id_pessoa, data_nascimento):
         self.getCursor().execute('update Pessoa set data_nascimento = "%s" where id_pessoa = "%d"' % data_nascimento,
-                              id_pessoa)
+                                 id_pessoa)
         self.getConexao().commit()
 
     def getPassword(self, id_pessoa):
         self.getCursor().execute('select password from Pessoa where id_pessoa = "%d"' % id_pessoa)
         password = self.getCursor().fetchone()
         return password[0]
-
-    def getPassword(self):
-        self.getCursor().execute('select password from Pessoa')
-        password = self.getCursor().fetchall()
-        return password
 
     def getConexao(self):
         return self.getConexao()

@@ -25,7 +25,7 @@ class Administrador(DatabaseManipulator):
         idturma = getIdTurma(turma)
         if idsala and idturma:
             self.getCursor().execute(
-                'insert into Estudante(id_pessoa,id_sala,id_turma) values ("%d","%d","%d")' % (id, idsala, idturma))
+                'insert into Estudante(id_pessoa,id_turma) values ("%d","%d")' % (id, idturma))
             self.getConexao().commit()
             return 1
         else:
@@ -64,8 +64,6 @@ class Administrador(DatabaseManipulator):
             id_sala = self.getCursor().fetchone()[0]  # retorna o id da sala que possui aquele nome
             self.getCursor().execute('select id_turma from Turma where nome = "%s"' % turma)
             id_turma = int(self.getCursor().fetchone()[0])
-            self.getCursor().execute('update Estudante set id_sala = "%s" where id_turma = "%d"' % (id_sala, id_turma))
-            self.getConexao().commit()  # adiciona a sala na tabela do estudante
             self.getCursor().execute('update Sala_Horario set ocupado = "%s" where id_sala = "%s"' % (turma, id_sala))
             self.getConexao().commit()  # adiciona na sala que ela esta ocupada por alguma turma
             return 0
