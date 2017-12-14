@@ -116,10 +116,13 @@ class DatabaseController:
                                          self.__turma.getNome)
 
     def cadastrarIntervalo(self, hora, sala, horario):  # cadastra um intervalo em uma sala em um horario do dia
-        return self.__administradores.cadastrarintervalo(hora, int(self.__salas_horarios.getSalaHorario(int(sala))[0]),
+        id_sala = self.__salas_horarios.getIdSalaHorario(sala)
+        if id_sala:
+            return self.__administradores.cadastrarintervalo(hora, int(id_sala[0]),
                                                          horario, self.__salas_horarios.setManha,
                                                          self.__salas_horarios.setTarde,
                                                          self.__salas_horarios.setNoite)
+        return -1
 
     def registrarLucro(self):  # registra o lucro do dia
         self.__cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')

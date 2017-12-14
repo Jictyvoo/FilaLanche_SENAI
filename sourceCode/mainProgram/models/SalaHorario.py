@@ -9,6 +9,10 @@ class SalaHorario(DatabaseManipulator):
         self.getCursor().execute('select * from Sala_Horario where id_sala = "%d"' % id_sala)
         return self.getCursor().fetchone()
 
+    def getIdSalaHorario(self, nome_sala):
+        self.getCursor().execute('select id_sala from Sala_Horario where nome_sala = "%s"' % nome_sala)
+        return self.getCursor().fetchone()
+
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.getCursor().execute('select * from Sala_Horario where id_sala = "%d" and ocupado = NULL' % idSala)
         return self.getCursor().fetchone()
