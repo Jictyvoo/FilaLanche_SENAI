@@ -43,25 +43,26 @@ class DatabaseController:
             return returnedId
 
     def validatePerson(self, cpf, senha):
-        if self.getId(cpf, senha):
+        if self.getId(cpf, senha):  # verifica se possui a pessoa no banco de dados com aquela senha
             return 0
         self.__cursor.execute('select id_pessoa from Pessoa where cpf = "%d"' % cpf)
-        if self.__cursor.fetchone():
-            return 1
+        if self.__cursor.fetchone():  # se não existir verifica se existe o cpf
+            return 1  # se existir o cpf retorna que ela botou a senha errada
         else:
-            return -1
+            return -1  # se não existir o cpf, retorna que ela botou o cpf errado
 
     def getIdEstudante(self, id_pessoa):
         return self.__estudantes.getIdEstudante(id_pessoa)
 
-    def getTipo(self, id_pessoa):
+    def getTipo(self, id_pessoa):  # retorna o tipo de pessoa
         self.__cursor.execute('select id_pessoa from Estudante where id_pessoa = "%d"' % id_pessoa)
-        ids = self.__cursor.fetchone()
-        if not ids:
-            self.__cursor.execute('select id_pessoa from Administrador where id_pessoa = "%d"' % id_pessoa)
-            ids = self.__cursor.fetchone()
-            if ids:
-                return 1
+        ids = self.__cursor.fetchone()  # verifica se a pessoa existe na tabela estudante
+        if ids:
+            return 0
+        self.__cursor.execute('select id_pessoa from Administrador where id_pessoa = "%d"' % id_pessoa)
+        ids = self.__cursor.fetchone()  # verifica se a pessoa existe na tabela Administrador
+        if ids:
+            return 1
         return 2
 
     def getTodosProdutos(self):  # retorna todos os produtos existentes no banco
@@ -75,19 +76,19 @@ class DatabaseController:
                                                       self.__turma.getIdTurma)
         return a
 
-    def cadastrarPessoa(self, nome, cpf, rg, data_nascimento, senha):
+    def cadastrarPessoa(self, nome, cpf, rg, data_nascimento, senha):  # cadastra uma pessoa no banco de dados
         return self.__administradores.cadastrarPessoa(nome, cpf, rg, data_nascimento, senha)
 
     def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         return self.__estudantes.getEstudante(idEstudante)
 
-    def cadastrarSala(self, nome):
+    def cadastrarSala(self, nome):  # cadastra a sala no banco de dados
         self.__administradores.cadastrarSala(nome)
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.__salas_horarios.getSala(idSala)
 
-    def cadastrarTurma(self, nome):
+    def cadastrarTurma(self, nome):  # cadastra uma turma no banco de dados
         self.__administradores.cadastrarTurma(nome)
 
     def cadastrarProduto(self, nome, preco, quantidade):  # metodo para adicionar um novo produto a venda
@@ -114,10 +115,13 @@ class DatabaseController:
         return self.__pedidos.novoPedido(idEstudante, listaProdutos, self.__estudantes.getEstudante, self.podeComprar,
                                          self.__turma.getNome)
 
-    def cadastrarIntervalo(self, hora, sala, horario):
-        return self.__administradores.cadastrarintervalo(hora, sala, horario)
+    def cadastrarIntervalo(self, hora, sala, horario):  # cadastra um intervalo em uma sala em um horario do dia
+        return self.__administradores.cadastrarintervalo(hora, int(self.__salas_horarios.getSalaHorario(int(sala))[0]),
+                                                         horario, self.__salas_horarios.setManha,
+                                                         self.__salas_horarios.setTarde,
+                                                         self.__salas_horarios.setNoite)
 
-    def registrarLucro(self):
+    def registrarLucro(self):  # registra o lucro do dia
         self.__cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')
         pedidos = self.__cursor.fetchall()  # pega todos os pedidos da data atual
         lucroTotal = 0  # seta um lucro total do dia

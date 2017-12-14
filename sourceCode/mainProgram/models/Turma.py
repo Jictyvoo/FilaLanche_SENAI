@@ -5,9 +5,6 @@ class Turma(DatabaseManipulator):
     def __init__(self, conexao):
         super(Turma, self).__init__(conexao)
 
-    def getConexao(self):
-        return self.getConexao()
-
     def getIdTurma(self, turma):
         self.getCursor().execute('select id_turma from Turma where nome = "%s"' % turma)
         a = self.getCursor().fetchone()

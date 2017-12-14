@@ -116,6 +116,7 @@ class Interface:
         return self.controller.validatePerson(cpf, senha)
 
     def cadastraproduto(self):
+        quantidade = 0
         nome = input("Digite o nome do produto\n__.> ")
         preco = float(input("Digite o preço do produto\n__.> "))
 
@@ -158,13 +159,16 @@ class Interface:
             print("Turma não alocada com sucesso! rs ")
 
     def cadastrarHorarioIntervalo(self):
+        hora = 0
+        horario = 0
         wrongInput = True
         while wrongInput:
             try:
                 hora = int(
                     input(
                         "Você gostaria de adicionar o horário de intervalo para\n[1] - manhã\n[2]-tarde\n[3] - noite\n__.> "))
-                wrongInput = False
+                if 1 <= hora <= 3:
+                    wrongInput = False
             except:
                 print("Informação inválida rs")
 
