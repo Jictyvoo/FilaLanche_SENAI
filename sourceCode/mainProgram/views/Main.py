@@ -9,4 +9,3 @@ interface = Interface()
 while (interface.mainLoop()):
     os.system("cls")
 
-#interface.apresentarLucro()

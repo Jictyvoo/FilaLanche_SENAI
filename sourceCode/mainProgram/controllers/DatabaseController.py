@@ -34,26 +34,33 @@ class DatabaseController:
             self.__produtos.carregarProdutosEmEstoque()  # le o arquivo csv e carrega no banco
             self.__salas_horarios.carregarSalas()  # le o arquivo csv e carrega no banco
 
-    def getPerson(self):
-        return Pessoa(self.__conexao)
-
-    def getAdmin(self):
-        return Administrador(self.__conexao)
-
     def getId(self, cpf, senha):
         self.__cursor.execute('select id_pessoa from Pessoa where cpf = "%d" and password ="%s"' % (cpf, senha))
-        return self.__cursor.fetchone()[0]
+        returnedId = self.__cursor.fetchone()
+        if returnedId:
+            return returnedId[0]
+        else:
+            return returnedId
+
+    def validatePerson(self, cpf, senha):
+        if self.getId(cpf, senha):
+            return 0
+        self.__cursor.execute('select id_pessoa from Pessoa where cpf = "%d"' % cpf)
+        if self.__cursor.fetchone():
+            return 1
+        else:
+            return -1
+
+    def getIdEstudante(self, id_pessoa):
+        return self.__estudantes.getIdEstudante(id_pessoa)
 
     def getTipo(self, id_pessoa):
-        self.__cursor.execute('select id_pessoa from Estudante')
-        ids = self.__cursor.fetchall()
-        for i in ids:
-            if int(i[0]) == id_pessoa:
-                return 0
-        self.__cursor.execute('select id_pessoa from Administrador')
-        ids = self.__cursor.fetchall()
-        for i in ids:
-            if int(i[0]) == id_pessoa:
+        self.__cursor.execute('select id_pessoa from Estudante where id_pessoa = "%d"' % id_pessoa)
+        ids = self.__cursor.fetchone()
+        if not ids:
+            self.__cursor.execute('select id_pessoa from Administrador where id_pessoa = "%d"' % id_pessoa)
+            ids = self.__cursor.fetchone()
+            if ids:
                 return 1
         return 2
 
@@ -69,18 +76,13 @@ class DatabaseController:
         return a
 
     def cadastrarPessoa(self, nome, cpf, rg, data_nascimento, senha):
-        self.__administradores.cadastrarPessoa(nome, cpf, rg, data_nascimento, senha)
+        return self.__administradores.cadastrarPessoa(nome, cpf, rg, data_nascimento, senha)
 
     def getEstudante(self, idEstudante):  # retorna um estudante existente no banco caso exista
         return self.__estudantes.getEstudante(idEstudante)
 
     def cadastrarSala(self, nome):
         self.__administradores.cadastrarSala(nome)
-
-    '''def cadastrarSala(self, nome_sala, manha, noite, tarde):  # metodo para instanciar um novo estudante
-        self.__cursor.execute('insert into sala_horario(nome_sala,manha,tarde,noite) values("%s","%s","%s","%s")' % (
-            nome_sala, manha, tarde, noite))
-        self.__conexao.commit()'''
 
     def getSala(self, idSala):  # metodo que busca as salas nas listas do controllers
         self.__salas_horarios.getSala(idSala)
@@ -111,6 +113,9 @@ class DatabaseController:
     def novoPedido(self, idEstudante, listaProdutos):  # funcao que realiza um novo pedido
         return self.__pedidos.novoPedido(idEstudante, listaProdutos, self.__estudantes.getEstudante, self.podeComprar,
                                          self.__turma.getNome)
+
+    def cadastrarIntervalo(self, hora, sala, horario):
+        return self.__administradores.cadastrarintervalo(hora, sala, horario)
 
     def registrarLucro(self):
         self.__cursor.execute('select id_produto, quantidade from Pedido where date(data_horario) = date(curdate())')
@@ -151,7 +156,7 @@ class DatabaseController:
             linhasCriacao.append(linha)
 
         comandos = []  # cria a lista que ira armazenar os comandos
-        tempComando = ""  # string temporaria para armazenar o comando
+        tempComando = ""  # string temporaria para armazenar o comando  
 
         delimiter = ";"
 

@@ -9,6 +9,10 @@ class Estudante(DatabaseManipulator):
         self.getCursor().execute('select * from Estudante where id_estudante = "%d"' % idEstudante)
         return self.getCursor().fetchone()
 
+    def getIdEstudante(self, id_pessoa):
+        self.getCursor().execute('select id_estudante from Estudante where id_pessoa = "%d"' % id_pessoa)
+        return self.getCursor().fetchone()[0]
+
     def getIdPessoa(self, id_estudante):
         self.getCursor().execute('select id_pessoa from Estudante where id_estudante = "%d"' % id_estudante)
         id_pessoa = self.getCursor().fetchone()
